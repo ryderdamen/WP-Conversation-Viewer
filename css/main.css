@@ -1,0 +1,99 @@
+/** Ryder Damen - http://ryderdamen.com
+
+
+*/
+
+/* Imports */
+@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+
+
+/* Regular-Size Screen CSS */
+
+/* Main Container */
+.CV-messages-container {
+    width: 600px;
+    margin: auto;
+    padding: 50px;
+}
+
+.msg-container {
+    width: 100%;
+    display: inline-block;
+}
+
+/* Regular message from other user */
+.CV-message {
+    padding-right: 1em;
+    padding-left: 1em;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    float: left;
+    text-align: left;
+    height: 2em;
+
+} 
+
+.CV-message-author {
+    width: 100%;
+    text-align: left;
+    font-size: 0.7em;
+
+}
+
+/* Me messages */
+.CV-me-message {
+    float: right;
+    text-align: right;
+}
+
+
+/* Facebook specific styling */
+.CV-message-style-facebook {
+    font-family: 'Roboto', sans-serif;    
+    background-color: #f8f8f8;
+    color: #222;
+    border-bottom-right-radius: 1.3em;
+    border-top-right-radius: 1.3em;
+    border-bottom-left-radius: 1.3em;
+    border-top-left-radius: 1.3em;
+
+}
+
+.CV-me-message-style-facebook {
+    font-family: 'Roboto', sans-serif;    
+    background-color: #0084ff;
+    color: #ffffff;
+    border-bottom-right-radius: 1.3em;
+    border-top-right-radius: 1.3em;
+    border-bottom-left-radius: 1.3em;
+    border-top-left-radius: 1.3em;
+}
+
+
+
+
+
+/* Tablet */
+   @media only screen 
+   and (min-width : 951px) and (max-width: 1114px) {
+       
+   
+   }
+   
+   
+   
+   /* Small Tablet / Phablet */
+      
+   @media only screen 
+   and (min-width : 841px) and (max-width: 950px) {
+   
+   }
+   
+   
+   
+   /* Phones */
+   @media only screen 
+   and (max-width: 840px) {
+       
+   
+   }
