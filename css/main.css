@@ -11,7 +11,7 @@
 
 /* Main Container */
 .CV-messages-container {
-    width: 600px;
+    max-width: 600px;
     margin: auto;
     padding: 50px;
 }
@@ -42,7 +42,6 @@
 /* Me messages */
 .CV-me-message {
     float: right;
-    text-align: right;
 }
 
 
@@ -71,6 +70,7 @@
     border-top-right-radius: 1.3em;
     border-bottom-left-radius: 1.3em;
     border-top-left-radius: 1.3em;
+    margin-top: 2em;
 }
 
 .CV-message-person-style-messenger {
@@ -137,31 +137,12 @@
     margin-bottom: 1em;
 }
 
-
-
-
-
-/* Tablet */
-   @media only screen 
-   and (min-width : 951px) and (max-width: 1114px) {
-       
    
-   }
-   
-   
-   
-   /* Small Tablet / Phablet */
-      
-   @media only screen 
-   and (min-width : 841px) and (max-width: 950px) {
-   
-   }
-   
-   
-   
-   /* Phones */
-   @media only screen 
-   and (max-width: 840px) {
-       
-   
-   }
+   /* Mobile Specific Styling */
+@media only screen and (max-width: 840px) {
+	   
+   	.CV-message {
+   		max-width: 80%;
+	} 
+    
+}

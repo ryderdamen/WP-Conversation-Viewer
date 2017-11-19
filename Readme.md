@@ -31,8 +31,10 @@ Here's a proposed layout for the shortcode.
 `````
 
 ## TODO
-* Build out functionanality for multi lines (CSS)
+* figure out a way to ignore any additional colons after the first delimiter :
+
 * More colour based, less platform based;
+* sanitize variables
 * Build out command function
 * make responsive
 * Build out ability to add images?
