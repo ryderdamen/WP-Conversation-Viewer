@@ -16,8 +16,6 @@ add_action( 'wp_enqueue_scripts', 'enqueueConversationViewerScriptsAndStyles', P
 add_shortcode( 'conversationViewer', 'createConversationViewerShortcode' );
 
 
-
-
 // Methods
 
 function enqueueConversationViewerScriptsAndStyles() {
@@ -42,7 +40,7 @@ function processConversation( $atts ) {
     $containerMaxWidthInPixels = $atts['width']; // Default of 400px
     $backgroundHex = $atts['background'];
 	
-	
+
     
    // Style selector
     switch ($style) {
@@ -190,6 +188,8 @@ function overrideStyles($containerMaxWidthInPixels, $backgroundHex) {
 
 function createConversationViewerShortcode( $atts ) {
     
+    echo "hey";
+    
     // Set attributes and defaults
     $atts = shortcode_atts(
 		array(
@@ -200,7 +200,7 @@ function createConversationViewerShortcode( $atts ) {
             'background' => 'transparent',
             'senderbubblecolor' => 'default',
             'sendertextcolor' => 'default',	
-            'width' => '600'
+            'width' => '600',
 		), 
 		$atts,
 		'conversationViewer'
