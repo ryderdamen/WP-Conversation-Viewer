@@ -105,7 +105,7 @@ class CVConversation {
 		    }
 		    else {
 			    // Pick a random colour from the array, then remove that value from the array
-				$r = rand(0, count($prettyColoursArray));
+				$r = rand(0, (count($prettyColoursArray)-1));
 				$snapHexStyle = $prettyColoursArray[$r];
 		    }
 		    
