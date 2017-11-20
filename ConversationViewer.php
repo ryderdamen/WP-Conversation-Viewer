@@ -29,7 +29,7 @@ function conversationViewerHookHeader() {
 
 function createConversationViewerShortcode( $atts ) {
         
-    include( plugin_dir_path( __FILE__ ) . "Conversation.php");
+    include_once( plugin_dir_path( __FILE__ ) . "Conversation.php");
     
     // Set attributes and defaults
     $atts = shortcode_atts(
@@ -45,8 +45,16 @@ function createConversationViewerShortcode( $atts ) {
 		$atts,
 		'conversationViewer'
     );
-        
-	$conversation = new CVConversation($atts);
+    
+    $conversation = new CVConversation($atts);
+    
+    if (htmlspecialchars($atts['json']) != false and htmlspecialchars($atts['json']) != "false"  and htmlspecialchars($atts['json']) != "") {
+	    // Return JSON
+	    
+	    return $conversation->getJSON(true);
+	    
+    }
+
 	return $conversation->getHTML();
 	
 }
