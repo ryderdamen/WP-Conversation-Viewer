@@ -15,7 +15,7 @@ $methodsToInclude = array(); // Needs a global scope to be placed in the footer
 // WP Actions
 add_action( 'wp_enqueue_scripts', 'enqueueConversationViewerScriptsAndStyles', PHP_INT_MAX );
 add_shortcode( 'conversationViewer', 'createConversationViewerShortcode' );
-
+add_action( 'wp_head', 'conversationViewerHookHeader' );
 
 // Methods
 
@@ -314,6 +314,9 @@ function overrideStyles($containerMaxWidthInPixels, $backgroundHex) {
 }
 
 
+function conversationViewerHookHeader() {
+	echo "<!-- This site uses the Conversation Viewer plugin: Visit http://ryderdamen.com/conversation-viewer for more information. -->";
+}
 
 
 function createConversationViewerShortcode( $atts ) {
