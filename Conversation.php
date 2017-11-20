@@ -1,4 +1,5 @@
 <?php
+	
  
 class CVConversation {
 	
@@ -18,7 +19,7 @@ class CVConversation {
 	public function __construct($shortcodeAttributes) {
 		
 		// Sanitize Shortcode Parameters
-		$sanitizedShortcodeParameters = cvSanitizeShortcodeParameters($shortcodeAttributes);
+		$sanitizedShortcodeParameters = $this->cvSanitizeShortcodeParameters($shortcodeAttributes);
 		  
 		// Setting and Processing Parameters
 		$this->styleUsed = $sanitizedShortcodeParameters['style'];
@@ -27,7 +28,7 @@ class CVConversation {
 		$this->mainContainerHex = $sanitizedShortcodeParameters['background'];
 		
 		// Populates peopleInvolved, sanitizedMessages and JSON string
-		processConversationString($sanitizedShortcodeParameters['conversation'], $sanitizedShortcodeParameters['delimiter']);
+		$this->processConversationString($sanitizedShortcodeParameters['conversation'], $sanitizedShortcodeParameters['delimiter']);
 	
 	}
 	  
@@ -126,9 +127,9 @@ class CVConversation {
 		    'people' => array_values($people),
 		    'numberOfMessages' => count($sanitizedMessagesArray),
 		    'style' => $this->styleUsed,
-		    'clickable' => $this->clickable,
+		    'clickable' => $this->isClickable,
 		    'mainContainerWidth' => $this->mainContainerWidth,
-		    'mainContainerHex' => $this->MainContainerHex,
+		    'mainContainerHex' => $this->mainContainerHex,
 	    );
 	    
 	    $jsonPrint = array(
@@ -166,7 +167,7 @@ class CVConversation {
 	
 	private function assignConversationStyles() {
 		
-		switch($this->style) {
+		switch($this->styleUsed) {
 			case ("ios"):
 				$mainContainer_styles = null;
 				$mainContainer_classes = null;
@@ -308,7 +309,7 @@ class CVConversation {
 		// Style Overrides (Space separated class names, and space separated styles)
 		
 		// Retrieve Styles and Classes
-		$SSA = assignConversationStyles();
+		$SSA = $this->assignConversationStyles();
 		
 		// Decode Array
 		$mainContainer_styles = $SSA['mainContainer_styles'];
@@ -344,11 +345,11 @@ class CVConversation {
 		$containerIdentifier = rand(0, 9999);
 		
 		// Start the loop
-		foreach($this->messagesArray as $msg) {
+		foreach($this->sanitizedMessages as $msg) {
 			
 			// Create a clickable class identifier for each person
 			$clickableClassIdentifier = "CV-Clickable-" . $containerIdentifier . "-" . str_replace(' ','',$msg['person']);
-			$methodsToInclude[] = 'highlightPersonOnClick(".' . $clickableClass . '"); '; // Include this person in an array
+			$methodsToInclude[] = 'highlightPersonOnClick(".' . $clickableClassIdentifier . '"); '; // Include this person in an array
 			
 			if (!$this->isClickable) {
 				// If the user did not explicitly set this conversation as clickable, disable this functionality
@@ -356,7 +357,7 @@ class CVConversation {
 				$methodsToInclude = null;	
 			}
 			
-			$htmlMarkup .= '<div class="msg-container ' $messageContainer_classes '" style="' . $messageContainer_styles .'"'; // Message Container
+			$htmlMarkup .= '<div class="msg-container ' . $messageContainer_classes . '" style="' . $messageContainer_styles .'">'; // Msg Ctnr
 			
 			if ($msg['person'] == "me" ) {
 				// Outgoing Message
@@ -399,7 +400,7 @@ class CVConversation {
 		$htmlMarkup .= '</div>'; // Closing Main Container
 		
 		// Clickable Scripts     
-		 if ($this->clickable and $this->clickable != "false" and $this->style != "snap") {
+		 if ($this->isClickable and $this->isClickable != "false" and $this->styleUsed != "snap") {
 		    // Snap doesn't need to be clickable, it has the color options
 			
 		    // Strip methods to include into a unique array
@@ -421,13 +422,13 @@ class CVConversation {
 	
 	public function getJSON( $wrappedInHtml = false ) {
 		if ($wrappedInHtml) {
-			return '<pre><code class="json"' . $jsonString . '</code></pre>';
+			return '<pre><code class="json"' . $this->jsonString . '</code></pre>';
 		}
-		return $jsonString;
+		return $this->jsonString;
 	}
 	
 	public function getHTML() {
-		return cvBuildHtmlMarkup();
+		return $this->cvBuildHtmlMarkup();
 	}  	 
 	
 	 
