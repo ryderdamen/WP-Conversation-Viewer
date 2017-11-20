@@ -35,9 +35,6 @@ Here's a proposed layout for the shortcode.
 
 * More colour based, less platform based;
 * sanitize variables
-* Build out command function
-* make responsive
-* Build out ability to add images?
 * Build out other themes
 * reorganize and refactor code into different subclasses and methods
 * build out extra params; post names
