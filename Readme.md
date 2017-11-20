@@ -186,14 +186,6 @@ JSON Output:
 `````
 
 
-## Ryder's TODO
-
-* Sanitize!
-* Build more themes
-* Refactor this hot mess
-* Deal with the clickable problem (assign a unique var for each instance)
-* Upload to WordPress
-
 
 ## Questions?
 If you have any questions or feature requests, please feel free to send me a message.
