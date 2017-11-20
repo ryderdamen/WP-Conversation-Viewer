@@ -82,7 +82,6 @@ class CVConversation {
 	        $sanitizedMessagesArray[] = array( // Append to a final array
 	            'person' => $person,
 	            'message' => $message,
-	            'uniqueColor' => null
 	        );
 
 	    } // End of ForEach
@@ -112,7 +111,7 @@ class CVConversation {
 		    // Then, cycle through the $messageAndSender array and append the color to their name
 		    foreach ($sanitizedMessagesArray as $key => $msg) {
 			    if ($msg['person'] == $personInvolved) {
-				    $sanitizedMessagesArray[$key]['snapColor'] = $snapHexStyle; // This is sketchy logic
+				    $sanitizedMessagesArray[$key]['uniqueColor'] = $snapHexStyle; // This is sketchy logic
 			    }  
 		    }  
 	    }
@@ -128,7 +127,7 @@ class CVConversation {
 		    'numberOfMessages' => count($sanitizedMessagesArray),
 		    'style' => $this->styleUsed,
 		    'clickable' => $this->isClickable,
-		    'mainContainerWidth' => $this->mainContainerWidth,
+		    'mainContainerWidth' => $this->mainContainerWidth . 'px',
 		    'mainContainerHex' => $this->mainContainerHex,
 	    );
 	    
@@ -138,7 +137,7 @@ class CVConversation {
 	    );
 	    
 		// And assign the JSON
-	    $this->jsonString = json_encode($jsonPrint);
+	    $this->jsonString = json_encode($jsonPrint, JSON_PRETTY_PRINT);
 		  
 	}
 	
@@ -432,13 +431,13 @@ class CVConversation {
 				
 				// Author
 				$htmlMarkup .= '<div class="CV-message-author ' . $incomingAuthor_classes . '" style="' . $incomingAuthor_styles . 
-				$this->snapchatColourOverride(0, $msg['snapColor']) .'">';
+				$this->snapchatColourOverride(0, $msg['uniqueColor']) .'">';
 				$htmlMarkup .= ucwords($msg['person']); // Print author name with Title Case
 				$htmlMarkup .= '</div>'; // Closing Author 
 				
 				// Message
 				$htmlMarkup .= '<div class="CV-message ' . $incomingMessage_classes . ' ' . $clickableClassIdentifier . '" style="' 
-				. $incomingMessage_styles . $this->snapchatColourOverride(1, $msg['snapColor']) .'">';
+				. $incomingMessage_styles . $this->snapchatColourOverride(1, $msg['uniqueColor']) .'">';
 				$htmlMarkup .= $msg['message'];
 				$htmlMarkup .= '</div>';
 			}
@@ -487,7 +486,7 @@ class CVConversation {
 	
 	public function getJSON( $wrappedInHtml = false ) {
 		if ($wrappedInHtml) {
-			return '<pre><code class="json"' . $this->jsonString . '</code></pre>';
+			return '<pre><code class="json">' . $this->jsonString . '</code></pre>';
 		}
 		return $this->jsonString;
 	}
