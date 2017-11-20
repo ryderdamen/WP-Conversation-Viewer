@@ -11,7 +11,7 @@ class CVConversation {
 	public $jsonString = null;
 	public $isClickable = false;
 	private $mainContainerWidth = "600";
-	private $mainContainerHex = "transparent";
+	private $mainContainerHex = "";
   
  
 	// Constructor --------------------------------------------------------------------------------------------------------------------
@@ -99,9 +99,9 @@ class CVConversation {
 	    foreach($people as $personInvolved) {
 		    // For each person, assign them a unique colour
 		    
-		    if ( count($personsInvolvedArray) > count($prettyColoursArray) ) {
+		    if ( count($people) > count($prettyColoursArray) ) {
 			    // If there's more people than colours, Just get some randomass colour
-			    $snapHexStyle = '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT) . ';';
+			    $snapHexStyle = '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT) . '';
 		    }
 		    else {
 			    // Pick a random colour from the array, then remove that value from the array
@@ -262,27 +262,75 @@ class CVConversation {
 				
 			default: // (Messenger)
 				$mainContainer_styles = null;
-				$mainContainer_classes = null;
+				$mainContainer_classes = "CV-mainContainer-facebook";
 
 				$messageContainer_styles = null;
-				$messageContainer_classes = null;
+				$messageContainer_classes = "CV-messageContainer-facebook";
 				
 				$incomingAuthor_styles = null;
-				$incomingAuthor_classes = null;
+				$incomingAuthor_classes = "CV-incomingAuthor-facebook";
 				
 				$outgoingAuthor_styles = null;
-				$outgoingAuthor_classes = null;
+				$outgoingAuthor_classes = "CV-outgoingAuthor-facebook";
 				
 				$incomingMessage_styles = null;
-				$incomingMessage_classes = null;
+				$incomingMessage_classes = "CV-incomingMessage-facebook";
 				
 				$outgoingMessage_styles = null;
-				$outgoingMessage_classes = null;
+				$outgoingMessage_classes = "CV-outgoingMessage-facebook";
 				
 				$command_styles = null;
-				$command_classes = null;
+				$command_classes = "CV-command-facebook";
 				break;
 		}
+		
+		// Inline Style Overrides (Setting Variables)
+		$mainContainer_styles = null;
+		$messageContainer_styles = null;
+		$incomingAuthor_styles = null;
+		$outgoingAuthor_styles = null;
+		$incomingMessage_styles = null;
+		$outgoingMessage_styles = null;
+		$command_styles = null;
+		
+		// Pass in any inline style overrides here
+		
+		if ($this->styleUsed == "whatsapp" and $this->mainContainerHex != "") {
+			// Set the border background (only as a default)
+			$mainContainer_styles = " background: url('" . plugin_dir_url( __FILE__ ) . "assets/whatsapp_background.png" . "'); padding: 50px; ";
+		}
+		
+		
+		
+		// Style Selector
+		switch($this->styleUsed) {
+			case ("ios"):
+				$styleAppendix = "ios";
+				break;
+			case ("android"):
+				$styleAppendix = "android";
+				break;
+			case ("whatsapp"):
+				$styleAppendix = "whatsapp";
+				break;
+			case ("snapchat"):
+				$styleAppendix = "snapchat";
+				break;
+			default:
+				$styleAppendix = "facebook";
+				break;
+		}
+		
+		
+		// Classes
+		$mainContainer_classes = "CV-mainContainer-" . $styleAppendix;
+		$messageContainer_classes = "CV-messageContainer-" . $styleAppendix;
+		$incomingAuthor_classes = "CV-incomingAuthor-" . $styleAppendix;
+		$outgoingAuthor_classes = "CV-outgoingAuthor-" . $styleAppendix;
+		$incomingMessage_classes = "CV-incomingMessage-" . $styleAppendix;
+		$outgoingMessage_classes = "CV-outgoingMessage-" . $styleAppendix;
+		$command_classes = "CV-command-" . $styleAppendix;
+				
 		
 		// Encode into Array
 		return $styleStringsArray = array(
@@ -357,7 +405,8 @@ class CVConversation {
 				$methodsToInclude = null;	
 			}
 			
-			$htmlMarkup .= '<div class="msg-container ' . $messageContainer_classes . '" style="' . $messageContainer_styles .'">'; // Msg Ctnr
+			$htmlMarkup .= '<div class="msg-container ' . $messageContainer_classes . '" style="' . $messageContainer_styles 
+			. '">'; // Message Container
 			
 			if ($msg['person'] == "me" ) {
 				// Outgoing Message
@@ -376,19 +425,20 @@ class CVConversation {
 			}
 			elseif ($msg['person'] == "command") {
 				// Message Command
-				$htmlMarkup .= '<div class="msg-command ' . $command_classes . '" style="' . $command_styles .'">' . $msg['message'] . '</div>';
+				$htmlMarkup .= '<div class="msg-command ' . $command_classes . '" style="' . $command_styles . '">' . $msg['message'] . '</div>';
 			}
 			else {
 				// Incoming Message
 				
 				// Author
-				$htmlMarkup .= '<div class="CV-message-author ' . $incomingAuthor_classes . '" style="' . $incomingAuthor_styles .'">';
+				$htmlMarkup .= '<div class="CV-message-author ' . $incomingAuthor_classes . '" style="' . $incomingAuthor_styles . 
+				$this->snapchatColourOverride(0, $msg['snapColor']) .'">';
 				$htmlMarkup .= ucwords($msg['person']); // Print author name with Title Case
 				$htmlMarkup .= '</div>'; // Closing Author 
 				
 				// Message
-				$htmlMarkup .= '<div class="CV-message' 
-					. $incomingMessage_classes . ' ' . $clickableClassIdentifier . '" style="' . $incomingMessage_styles .'">';
+				$htmlMarkup .= '<div class="CV-message ' . $incomingMessage_classes . ' ' . $clickableClassIdentifier . '" style="' 
+				. $incomingMessage_styles . $this->snapchatColourOverride(1, $msg['snapColor']) .'">';
 				$htmlMarkup .= $msg['message'];
 				$htmlMarkup .= '</div>';
 			}
@@ -417,6 +467,21 @@ class CVConversation {
 		return $htmlMarkup;
 		
 	}  
+	
+	private function snapchatColourOverride($type, $hex) {
+		// Handles the custom snapchat color overrides
+		if ($this->styleUsed == "snapchat") {
+			if ($type == 0) {
+				// Author Colour
+				return ' color: ' . $hex . ';';
+			}
+			else {
+				// Border Colour
+				return ' border-left-color: ' . $hex . ';';
+			}
+		}
+		return; // If we're not using snapchat, don't return anything
+	}
 	  
 	// Return Methods --------------------------------------------------------------------------------------------------------------
 	

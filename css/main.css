@@ -3,8 +3,13 @@
 
 */
 
-/* Imports */
+
 @import url('https://fonts.googleapis.com/css?family=Roboto:300');
+
+
+/****************************************************************************
+							Default Styling
+****************************************************************************/
 
 
 /* Regular-Size Screen CSS */
@@ -13,15 +18,16 @@
 .CV-messages-container {
     max-width: 600px;
     margin: auto;
-    padding: 50px;
+/*     padding: 50px; */
 }
 
+/* Individual Message Container */
 .msg-container {
     width: 100%;
     display: inline-block;
 }
 
-/* Regular message from other user */
+/* Incoming Messages */
 .CV-message {
     padding-right: 1em;
     padding-left: 1em;
@@ -34,23 +40,53 @@
 
 } 
 
+/* Message Author */
 .CV-message-author {
     
-
 }
 
-/* Me messages */
-.CV-me-message {
+/* Outgoing Messages */
+.CV-outgoing {
     float: right;
 }
 
 
+
 /****************************************************************************
-					Facebook Specific Styling
+					Platform Specific Styling
 ****************************************************************************/
 
-.CV-message-style-facebook {
-    font-family: 'Roboto', sans-serif;    
+
+/***************************************
+			Facebook Styles
+****************************************/
+
+.CV-mainContainer-facebook {
+	
+}
+
+.CV-messageContainer-facebook {
+	
+}
+
+.CV-incomingAuthor-facebook {
+	
+	width: 100%;
+    text-align: left;
+    font-size: 0.7em;
+    margin-top: 1em;
+    
+}
+
+.CV-outgoingAuthor-facebook {
+	
+	display: none;
+	
+}
+
+.CV-incomingMessage-facebook {
+	
+	font-family: 'Roboto', sans-serif;    
     font-weight: 300;
     background-color: #f8f8f8;
     color: #222;
@@ -58,11 +94,12 @@
     border-top-right-radius: 1.3em;
     border-bottom-left-radius: 1.3em;
     border-top-left-radius: 1.3em;
-
+	
 }
 
-.CV-me-message-style-facebook {
-    font-family: 'Roboto', sans-serif;    
+.CV-outgoingMessage-facebook {
+	
+	font-family: 'Roboto', sans-serif;    
     font-weight: 300;
     background-color: #0084ff;
     color: #ffffff;
@@ -71,17 +108,11 @@
     border-bottom-left-radius: 1.3em;
     border-top-left-radius: 1.3em;
     margin-top: 2em;
-}
-
-.CV-message-person-style-messenger {
-	width: 100%;
-    text-align: left;
-    font-size: 0.7em;
-    margin-top: 1em;
 	
 }
 
-.CV-message-command-style-messenger {
+.CV-command-facebook {
+	
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
 	width: 100%;
@@ -89,15 +120,41 @@
     font-size: 0.7em;
     margin-top: 2em;
     margin-bottom: 1em;
+	
 }
 
+/***************************************
+			Android Styles
+****************************************/
 
-/****************************************************************************
-					Android Specific Styling
-****************************************************************************/
+.CV-mainContainer-android {
+	
+    
+}
 
-.CV-message-style-android {
-    font-family: 'Roboto', sans-serif; 
+.CV-messageContainer-android {
+	
+	
+}
+
+.CV-incomingAuthor-android {
+	
+	width: 100%;
+    text-align: left;
+    font-size: 0.7em;
+    margin-top: 1em;
+	
+}
+
+.CV-outgoingAuthor-android {
+	
+	display: none;
+	
+}
+
+.CV-incomingMessage-android {
+	
+	font-family: 'Roboto', sans-serif; 
     font-weight: 300;   
     background-color: #9C27B0;
     color: #ffffff;
@@ -105,11 +162,12 @@
     border-top-right-radius: 1.3em;
     border-bottom-left-radius: 1.3em;
     border-top-left-radius: 1.3em;
-
+	
 }
 
-.CV-me-message-style-android {
-    font-family: 'Roboto', sans-serif;
+.CV-outgoingMessage-android {
+	
+	font-family: 'Roboto', sans-serif;
     font-weight: 300;    
     background-color: #f8f8f8;
     color: #222222;
@@ -118,17 +176,11 @@
     border-bottom-left-radius: 1.3em;
     border-top-left-radius: 1.3em;
     margin-top: 2em;
-}
-
-.CV-message-person-style-android {
-	width: 100%;
-    text-align: left;
-    font-size: 0.7em;
-    margin-top: 1em;
 	
 }
 
-.CV-message-command-style-android {
+.CV-command-android {
+	
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
 	width: 100%;
@@ -136,15 +188,40 @@
     font-size: 0.7em;
     margin-top: 2em;
     margin-bottom: 1em;
+	
 }
 
 
-/****************************************************************************
-					iOS Specific Styling
-****************************************************************************/
+/***************************************
+			ios Styles
+****************************************/
 
-.CV-message-style-ios {
-    font-family: 'Roboto', sans-serif;    
+.CV-mainContainer-ios {
+	
+}
+
+.CV-messageContainer-ios {
+	
+}
+
+.CV-incomingAuthor-ios {
+	
+	width: 100%;
+    text-align: left;
+    font-size: 0.7em;
+    margin-top: 1em;
+	
+}
+
+.CV-outgoingAuthor-ios {
+	
+	display: none;
+	
+}
+
+.CV-incomingMessage-ios {
+	
+	font-family: 'Roboto', sans-serif;    
     font-weight: 300;
     background-color: #dfdfdf;
     color: #222;
@@ -152,11 +229,12 @@
     border-top-right-radius: 1.3em;
     border-bottom-left-radius: 1.3em;
     border-top-left-radius: 1.3em;
-
+	
 }
 
-.CV-me-message-style-ios {
-    font-family: 'Roboto', sans-serif;    
+.CV-outgoingMessage-ios {
+	
+	font-family: 'Roboto', sans-serif;    
     font-weight: 300;
     background-color: #5BC236;
     color: #ffffff;
@@ -165,17 +243,11 @@
     border-bottom-left-radius: 1.3em;
     border-top-left-radius: 1.3em;
     margin-top: 2em;
-}
-
-.CV-message-person-style-ios {
-	width: 100%;
-    text-align: left;
-    font-size: 0.7em;
-    margin-top: 1em;
 	
 }
 
-.CV-message-command-style-ios {
+.CV-command-ios {
+	
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
 	width: 100%;
@@ -183,16 +255,46 @@
     font-size: 0.7em;
     margin-top: 2em;
     margin-bottom: 1em;
+	
 }
 
 
 
-/****************************************************************************
-					WhatsApp Specific Styling
-****************************************************************************/
+/***************************************
+			WhatsApp Styles
+****************************************/
 
-.CV-message-style-whatsapp {
-    font-family: 'Roboto', sans-serif; 
+.CV-mainContainer-whatsapp {
+	
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	
+	
+}
+
+.CV-messageContainer-whatsapp {
+	
+}
+
+.CV-incomingAuthor-whatsapp {
+	
+	width: 100%;
+    text-align: left;
+    font-size: 0.7em;
+    margin-top: 1em;
+	
+}
+
+.CV-outgoingAuthor-whatsapp {
+	
+	display: none;
+	
+}
+
+.CV-incomingMessage-whatsapp {
+	
+	font-family: 'Roboto', sans-serif; 
     font-weight: 300;   
     background-color: #f8f8f8;
     color: #222222;
@@ -200,11 +302,12 @@
     border-top-right-radius: 0.3em;
     border-bottom-left-radius: 0.3em;
     border-top-left-radius: 0.3em;
-
+	
 }
 
-.CV-me-message-style-whatsapp {
-    font-family: 'Roboto', sans-serif;
+.CV-outgoingMessage-whatsapp {
+	
+	font-family: 'Roboto', sans-serif;
     font-weight: 300;    
     background-color: #DCF8C6;
     color: #222222;
@@ -213,32 +316,57 @@
     border-bottom-left-radius: 0.3em;
     border-top-left-radius: 0.3em;
     margin-top: 2em;
-}
-
-.CV-message-person-style-whatsapp {
-	width: 100%;
-    text-align: left;
-    font-size: 0.7em;
-    margin-top: 1em;
 	
 }
 
-.CV-message-command-style-whatsapp {
+.CV-command-whatsapp {
+	
+	background-color: #f7ef7e;
+	padding: 1em;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
-	width: 100%;
     text-align: center;
     font-size: 0.7em;
     margin-top: 2em;
     margin-bottom: 1em;
+	
 }
 
-/****************************************************************************
-					Snapchat Specific Styling
-****************************************************************************/
 
-.CV-message-style-snap {
-    font-family: 'Roboto', sans-serif; 
+
+/***************************************
+			Snapchat Styles
+****************************************/
+
+.CV-mainContainer-snapchat {
+	
+	margin-top: 1em;
+	
+}
+
+.CV-messageContainer-snapchat {
+	
+}
+
+.CV-incomingAuthor-snapchat {
+	
+	width: 100%;
+    text-align: left;
+    font-size: 0.7em;	
+	
+}
+
+.CV-outgoingAuthor-snapchat {
+	
+	width: 100%;
+    text-align: left;
+    font-size: 0.7em;	
+	
+}
+
+.CV-incomingMessage-snapchat {
+	
+	font-family: 'Roboto', sans-serif; 
     font-weight: 300;   
     background-color: transparent;
     color: #222222;
@@ -248,7 +376,8 @@
 	
 }
 
-.CV-me-message-style-snap {
+.CV-outgoingMessage-snapchat {
+	
 	float: left;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;    
@@ -257,30 +386,28 @@
     border-left-style: solid;
 	border-left-color: #cc0000;
 	border-left-width: 2px;
+	
 }
 
-.CV-message-person-style-snap {
-	width: 100%;
-    text-align: left;
-    font-size: 0.7em;	
-}
-
-.CV-message-command-style-snap {
+.CV-command-snapchat {
+	
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
 	width: 100%;
     text-align: center;
     font-size: 0.7em;
     margin-top: 2em;
-}
-
-.CV-message-container-snap {
-	margin-top: 1em;
 	
 }
 
+
+
+
+/****************************************************************************
+						Responsive Styling
+****************************************************************************/
+
    
-   /* Mobile Specific Styling */
 @media only screen and (max-width: 840px) {
 	   
    	.CV-message {
