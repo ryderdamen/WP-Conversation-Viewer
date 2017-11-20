@@ -31,6 +31,8 @@ Install either from the WordPress Plugin directory, or by downloading a zip of t
 
 `````
 
+Note: You cannot use quotations ````` "Hello" ````` within these conversations due to the limitations of the shortcode. If you do need to use quotations, simply use this override: ````` &rdquo;Hello&rdquo; ````` . Please note, you must input this override within the TEXT tab, not the visual tab, as WordPress will replace the first ampersand with code.
+
 ## Customizable Options
 To make this a little more useful, I built a few customizable options you can play with.
 
