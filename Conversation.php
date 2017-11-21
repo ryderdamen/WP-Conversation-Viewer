@@ -12,6 +12,7 @@ class CVConversation {
 	public $isClickable = false;
 	private $mainContainerWidth = "600";
 	private $mainContainerHex = "";
+	private $mainContainerPadding = 25;
   
  
 	// Constructor --------------------------------------------------------------------------------------------------------------------
@@ -26,6 +27,7 @@ class CVConversation {
 		$this->isClickable = $sanitizedShortcodeParameters['clickable'];
 		$this->mainContainerWidth = $sanitizedShortcodeParameters['width'];
 		$this->mainContainerHex = $sanitizedShortcodeParameters['background'];
+		$this->mainContainerPadding = $sanitizedShortcodeParameters['padding'];
 		
 		// Populates peopleInvolved, sanitizedMessages and JSON string
 		$this->processConversationString($sanitizedShortcodeParameters['conversation'], $sanitizedShortcodeParameters['delimiter']);
@@ -129,6 +131,7 @@ class CVConversation {
 		    'clickable' => $this->isClickable,
 		    'mainContainerWidth' => $this->mainContainerWidth . 'px',
 		    'mainContainerHex' => $this->mainContainerHex,
+		    'mainContainerPadding' => $this->mainContainerPadding,
 	    );
 	    
 	    $jsonPrint = array(
@@ -149,6 +152,7 @@ class CVConversation {
 		$shortcodeAttributes['delimiter'] = $shortcodeAttributes['delimiter']; // Not yet sanitized
 		$shortcodeAttributes['json'] = htmlspecialchars($shortcodeAttributes['json']);
 		$shortcodeAttributes['width'] = filter_var($shortcodeAttributes['width'], FILTER_VALIDATE_INT);
+		$shortcodeAttributes['padding'] = filter_var($shortcodeAttributes['padding'], FILTER_VALIDATE_INT);
 		$shortcodeAttributes['background'] = htmlspecialchars($shortcodeAttributes['background']);
 		$shortcodeAttributes['clickable'] = htmlspecialchars($shortcodeAttributes['clickable']);
 		
@@ -166,139 +170,39 @@ class CVConversation {
 	
 	private function assignConversationStyles() {
 		
-		switch($this->styleUsed) {
-			case ("ios"):
-				$mainContainer_styles = null;
-				$mainContainer_classes = null;
-
-				$messageContainer_styles = null;
-				$messageContainer_classes = null;
-				
-				$incomingAuthor_styles = null;
-				$incomingAuthor_classes = null;
-				
-				$outgoingAuthor_styles = null;
-				$outgoingAuthor_classes = null;
-				
-				$incomingMessage_styles = null;
-				$incomingMessage_classes = null;
-				
-				$outgoingMessage_styles = null;
-				$outgoingMessage_classes = null;
-				
-				$command_styles = null;
-				$command_classes = null;
-				break;
-				
-			case ("android"):
-				$mainContainer_styles = null;
-				$mainContainer_classes = null;
-
-				$messageContainer_styles = null;
-				$messageContainer_classes = null;
-				
-				$incomingAuthor_styles = null;
-				$incomingAuthor_classes = null;
-				
-				$outgoingAuthor_styles = null;
-				$outgoingAuthor_classes = null;
-				
-				$incomingMessage_styles = null;
-				$incomingMessage_classes = null;
-				
-				$outgoingMessage_styles = null;
-				$outgoingMessage_classes = null;
-				
-				$command_styles = null;
-				$command_classes = null;
-				break;
-				
-			case ("whatsapp"):
-				$mainContainer_styles = null;
-				$mainContainer_classes = null;
-
-				$messageContainer_styles = null;
-				$messageContainer_classes = null;
-				
-				$incomingAuthor_styles = null;
-				$incomingAuthor_classes = null;
-				
-				$outgoingAuthor_styles = null;
-				$outgoingAuthor_classes = null;
-				
-				$incomingMessage_styles = null;
-				$incomingMessage_classes = null;
-				
-				$outgoingMessage_styles = null;
-				$outgoingMessage_classes = null;
-				
-				$command_styles = null;
-				$command_classes = null;
-				break;
-				
-			case ("snap"):
-				$mainContainer_styles = null;
-				$mainContainer_classes = null;
-
-				$messageContainer_styles = null;
-				$messageContainer_classes = null;
-				
-				$incomingAuthor_styles = null;
-				$incomingAuthor_classes = null;
-				
-				$outgoingAuthor_styles = null;
-				$outgoingAuthor_classes = null;
-				
-				$incomingMessage_styles = null;
-				$incomingMessage_classes = null;
-				
-				$outgoingMessage_styles = null;
-				$outgoingMessage_classes = null;
-				
-				$command_styles = null;
-				$command_classes = null;
-				break;
-				
-			default: // (Messenger)
-				$mainContainer_styles = null;
-				$mainContainer_classes = "CV-mainContainer-facebook";
-
-				$messageContainer_styles = null;
-				$messageContainer_classes = "CV-messageContainer-facebook";
-				
-				$incomingAuthor_styles = null;
-				$incomingAuthor_classes = "CV-incomingAuthor-facebook";
-				
-				$outgoingAuthor_styles = null;
-				$outgoingAuthor_classes = "CV-outgoingAuthor-facebook";
-				
-				$incomingMessage_styles = null;
-				$incomingMessage_classes = "CV-incomingMessage-facebook";
-				
-				$outgoingMessage_styles = null;
-				$outgoingMessage_classes = "CV-outgoingMessage-facebook";
-				
-				$command_styles = null;
-				$command_classes = "CV-command-facebook";
-				break;
-		}
-		
 		// Inline Style Overrides (Setting Variables)
-		$mainContainer_styles = null;
-		$messageContainer_styles = null;
-		$incomingAuthor_styles = null;
-		$outgoingAuthor_styles = null;
-		$incomingMessage_styles = null;
-		$outgoingMessage_styles = null;
-		$command_styles = null;
+		$mainContainer_styles = "";
+		$messageContainer_styles = "";
+		$incomingAuthor_styles = "";
+		$outgoingAuthor_styles = "";
+		$incomingMessage_styles = "";
+		$outgoingMessage_styles = "";
+		$command_styles = "";
 		
 		// Pass in any inline style overrides here
 		
-		if ($this->styleUsed == "whatsapp" and $this->mainContainerHex != "") {
-			// Set the border background (only as a default)
+		if ($this->styleUsed == "whatsapp" ) {
+			// Set the background (only as a default)
 			$mainContainer_styles = " background: url('" . plugin_dir_url( __FILE__ ) . "assets/whatsapp_background.png" . "'); padding: 50px; ";
 		}
 		
+		if ($this->mainContainerHex != "default") {
+			// There is an override for the main container
+
+			// Disable the background image
+			$mainContainer_styles .= " background: none;"; // Disable background image in the case of whatsapp
+			$mainContainer_styles .= " background-color: " . $this->mainContainerHex . ";";
+		}
+		
+		if ($this->mainContainerWidth != 600) {
+			// Container Width Override
+			$mainContainer_styles .= " max-width: " . $this->mainContainerWidth . "px;";
+		}
+		
+		if ($this->mainContainerPadding != 25) {
+			// Padding override
+			$mainContainer_styles .= " padding: " . $this->mainContainerPadding . "px;";
+		}
 		
 		
 		// Style Selector

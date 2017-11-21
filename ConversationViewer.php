@@ -38,9 +38,10 @@ function createConversationViewerShortcode( $atts ) {
             'style' => 'messenger',
             'delimiter' => '//', 		
             'json' => false,
-            'background' => 'transparent',
+            'background' => 'default',
             'clickable' => false,
             'width' => '600',
+            'padding' => '25',
 		), 
 		$atts,
 		'conversationViewer'

@@ -93,6 +93,22 @@ The maximum width is set at 600px with an auto margin; but the box is responsive
 
 `````
 
+### Custom Padding
+The default padding of the main container is set to 25 pixels, but you can set it to something else with the padding="" selector. Enter the value in pixels without the px suffix.
+
+`````
+
+[conversationViewer style="ios" padding="100" conversation="
+
+//Me: Hey!
+
+//You: Hi!
+
+"]
+
+
+`````
+
 ### Custom Delimiter
 For some reason you or one of your friends uses double slashes within a conversation. Weird, but alright. You can set the delimiter to something else using the delimiter="" selector.
 
@@ -130,57 +146,62 @@ JSON Output:
 `````json
 
 {
-  "meta": {
-    "people": {
-      "0": "me",
-      "1": "you",
-      "4": "command",
-      "5": "professor oak"
+    "meta": {
+        "people": [
+            "me",
+            "you",
+            "command",
+            "someone else"
+        ],
+        "numberOfMessages": 8,
+        "style": "messenger",
+        "clickable": "",
+        "mainContainerWidth": "600px",
+        "mainContainerHex": "default",
+        "mainContainerPadding": 25
     },
-    "numberOfMessages": 8
-  },
-  "data": [
-    {
-      "person": "me",
-      "message": " Hello\n",
-      "snapColor": "#895725;"
-    },
-    {
-      "person": "you",
-      "message": " Hi! \ud83d\ude00\n",
-      "snapColor": "#007e9a;"
-    },
-    {
-      "person": "me",
-      "message": " What's up?\n",
-      "snapColor": "#895725;"
-    },
-    {
-      "person": "you",
-      "message": " Not much\n",
-      "snapColor": "#007e9a;"
-    },
-    {
-      "person": "command",
-      "message": " Professor Oak has joined the conversation.\n",
-      "snapColor": "#0614e3;"
-    },
-    {
-      "person": "professor oak",
-      "message": " Hey guys!\n",
-      "snapColor": "#441861;"
-    },
-    {
-      "person": "me",
-      "message": " Hi Professor.\n",
-      "snapColor": "#895725;"
-    },
-    {
-      "person": "you",
-      "message": " Hello.\n",
-      "snapColor": "#007e9a;"
-    }
-  ]
+    "data": [
+        {
+            "person": "me",
+            "message": " Let me explain how it works.\n",
+            "uniqueColor": "#EB984E"
+        },
+        {
+            "person": "you",
+            "message": " Okay, sounds good! \n",
+            "uniqueColor": "#48C9B0"
+        },
+        {
+            "person": "me",
+            "message": " I type up a conversation between the two of us in plain text in the regular WordPress editor, and the plugin converts it to look like a messaging service.\n",
+            "uniqueColor": "#EB984E"
+        },
+        {
+            "person": "you",
+            "message": " Wow, that's really cool!\n",
+            "uniqueColor": "#48C9B0"
+        },
+        {
+            "person": "command",
+            "message": " Someone Else has joined the conversation.\n",
+            "uniqueColor": "#EB984E"
+        },
+        {
+            "person": "someone else",
+            "message": " Hey, more than one person can join?\n",
+            "uniqueColor": "#1A5276"
+        },
+        {
+            "person": "me",
+            "message": " Absolutely! As many people as you want, though you as the message-sender will always keep the right side of the conversation.\n",
+            "uniqueColor": "#EB984E"
+        },
+        {
+            "person": "you",
+            "message": " That's cool!\n",
+            "uniqueColor": "#48C9B0"
+        }
+    ]
 }
 
 `````
