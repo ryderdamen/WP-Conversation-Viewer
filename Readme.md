@@ -9,7 +9,7 @@ Install either from the WordPress Plugin directory, or by downloading a zip of t
 
 `````
 
-[conversationViewer style="messenger" conversation="
+[conversationViewer]
 
 //Me: Let me explain how it works.
 
@@ -27,11 +27,91 @@ Install either from the WordPress Plugin directory, or by downloading a zip of t
 
 // You: That's cool!
 
-"]
+[/conversationViewer]
 
 `````
 
-Note: You cannot use quotations ````` "Hello" ````` within these conversations due to the limitations of the shortcode. If you do need to use quotations, simply use this override: ````` &rdquo;Hello&rdquo; ````` . Please note, you must input this override within the TEXT tab, not the visual tab, as WordPress will replace the first ampersand with code.
+Note: This plugin uses enclosing shortcodes like this: `````[conversationViewer] [/conversationViewer]````` While it will work to put your conversation within a conversation="" tag, it's not recommended; just stick to the format above.
+
+## How To Use It
+
+### Getting Started
+
+When writing a WordPress post or plugin, simply add this little bit of shortcode to display it as a conversation.
+
+`````
+[conversationViewer]
+
+// Me: Hello!
+
+// You: Hi!
+
+[/conversationViewer]
+
+`````
+
+### Adding a line
+
+There are three parts to adding a new line or speech bubble:
+
+* The Delimiter (//)
+* The Name
+* The Message
+
+First, start off with the delimiter, which is two slashes. After which you can write the name of the person sending the message. Then, a colon to indicate the message has started, and then, your message.
+
+### The "Me" Tag (Outgoing Messages)
+For a chat bubble to appear to be an "outgoing" message (usually on the right side of the conversation), you will need to use the "Me" tag (not case sensitive). When you use this tag, it will appear as though you sent the message.
+
+`````
+[conversationViewer]
+
+// Me: This is a message that I'm sending!
+
+// Me: This message is also sent by me.
+
+[/conversationViewer]
+
+`````
+
+### Messages from other people (Incoming Messages)
+For anyone else, simply use the same procedure, and choose any name you want. Keep in mind, for clickable functionality to work, you will need to use the exact same spelling every time for each person. So don't be calling someone Jim in one place, and James in another. 
+
+`````
+[conversationViewer clickable="true" ]
+
+// Me: Hey Guys, it's me!
+
+// Jim: Hey, this is Jim!
+
+// Sally: This is Sally!
+
+// Jim: This is also Jim. When you click me, all of my messages will light up.
+
+[/conversationViewer]
+
+`````
+
+### Commands
+Sometimes in chats, the service indicates that someone has left, joined, changed the name of the conversation, etc. You can replicate this functionality with a command. It works like this:
+
+ `````
+[conversationViewer clickable="true" ]
+
+// Me: Hey Guys, it's me!
+
+// Jim: Hey, this is Jim!
+
+// Command: Sally has joined the conversation.
+
+// Sally: Hello!
+
+[/conversationViewer]
+
+`````
+
+That's all you should need to get started. For more customizable options, keep on reading!
+
 
 ## Customizable Options
 To make this a little more useful, I built a few customizable options you can play with.
@@ -50,14 +130,13 @@ To help your readers identify who's speaking, you can enable JavaScript clickabi
 
 `````
 
-[conversationViewer style="whatsapp" clickable="yeaaa" conversation="
+[conversationViewer style="whatsapp" clickable="yeaaa" ]
 
 //Me: Hey!
 
 //You: Hi!
 
-"]
-
+[/conversationViewer]
 
 `````
 
@@ -66,13 +145,13 @@ The background is normally transparent, but if you need to set it to a specific 
 
 `````
 
-[conversationViewer style="snapchat" background="#cc0000" conversation="
+[conversationViewer style="snapchat" background="#cc0000" ]
 
 //Me: Hey!
 
 //You: Hi!
 
-"]
+[/conversationViewer]
 
 
 `````
@@ -82,13 +161,13 @@ The maximum width is set at 600px with an auto margin; but the box is responsive
 
 `````
 
-[conversationViewer style="ios" width="900" conversation="
+[conversationViewer style="ios" width="900" ]
 
 //Me: Hey!
 
 //You: Hi!
 
-"]
+[/conversationViewer]
 
 
 `````
@@ -98,13 +177,13 @@ The default padding of the main container is set to 25 pixels, but you can set i
 
 `````
 
-[conversationViewer style="ios" padding="100" conversation="
+[conversationViewer style="ios" padding="100" ]
 
 //Me: Hey!
 
 //You: Hi!
 
-"]
+[/conversationViewer]
 
 
 `````
@@ -114,13 +193,13 @@ For some reason you or one of your friends uses double slashes within a conversa
 
 `````
 
-[conversationViewer style="snapchat" delimiter="||" conversation="
+[conversationViewer style="snapchat" delimiter="||" ]
 
 ||Me: The delimiter is now two pipes.
 
 ||You: Weird.
 
-"]
+[/conversationViewer]
 
 
 `````
@@ -131,17 +210,18 @@ This one's weird and I'm not maintaining it, but I built it because I'm a big JS
 
 `````
 
-[conversationViewer style="messenger" json="surewhynot" conversation="
+[conversationViewer style="messenger" json="surewhynot" ]
 
 //Me: Hey!
 
 //You: Hi!
 
-"]
+[/conversationViewer]
 
 
 `````
-JSON Output:
+
+The JSON Output of this function is as follows:
 
 `````json
 
