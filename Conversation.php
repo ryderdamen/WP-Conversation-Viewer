@@ -57,6 +57,7 @@ class CVConversation {
 	    }
 	    catch (Exception $e){
 		   // Throw an exception?
+		   
 	    }
 	
 	    if (!is_array($explodedInput)) {
@@ -152,7 +153,6 @@ class CVConversation {
 	private function cvSanitizeShortcodeParameters($shortcodeAttributes, $shortcodeContent) {
 		// Sanitizes the shortcode Parameters
 		 
-		 
 		 // Content
 		$shortcodeAttributes['conversation'] = htmlspecialchars($shortcodeAttributes['conversation']);
 		
@@ -164,7 +164,7 @@ class CVConversation {
 		
 		// Attributes
 		$shortcodeAttributes['style'] = htmlspecialchars($shortcodeAttributes['style']);
-		$shortcodeAttributes['delimiter'] = $shortcodeAttributes['delimiter']; // Not yet sanitized
+		$shortcodeAttributes['delimiter'] = $shortcodeAttributes['delimiter'];
 		$shortcodeAttributes['json'] = htmlspecialchars($shortcodeAttributes['json']);
 		$shortcodeAttributes['width'] = filter_var($shortcodeAttributes['width'], FILTER_VALIDATE_INT);
 		$shortcodeAttributes['padding'] = filter_var($shortcodeAttributes['padding'], FILTER_VALIDATE_INT);
@@ -202,8 +202,6 @@ class CVConversation {
 		
 		if ($this->mainContainerHex != "default") {
 			// There is an override for the main container
-
-			// Disable the background image
 			$mainContainer_styles .= " background: none;"; // Disable background image in the case of whatsapp
 			$mainContainer_styles .= " background-color: " . $this->mainContainerHex . ";";
 		}
@@ -302,11 +300,11 @@ class CVConversation {
 		$methodsToInclude = array();
 		
 		
-		// Start Markup
+		// Start DOM Markup
+		$htmlMarkup = '<div class="CV-messages-container ' . esc_attr($mainContainer_classes) 
+			.'" style="' . esc_attr($mainContainer_styles) .'">'; // Main Container
 		
-		$htmlMarkup = '<div class="CV-messages-container ' . $mainContainer_classes .'" style="' . $mainContainer_styles .'">'; // Main Container
-		
-		// Pick a unique identifier for the container
+		// Pick a unique identifier for the container, preventing clicks triggering other containers to highlight
 		$containerIdentifier = rand(0, 9999);
 		
 		// Start the loop
@@ -322,41 +320,45 @@ class CVConversation {
 				$methodsToInclude = null;	
 			}
 			
-			$htmlMarkup .= '<div class="msg-container ' . $messageContainer_classes . '" style="' . $messageContainer_styles 
-			. '">'; // Message Container
+			$htmlMarkup .= '<div class="msg-container ' . esc_attr($messageContainer_classes) 
+				. '" style="' . esc_attr($messageContainer_styles) . '">'; // Message Container
 			
 			if ($msg['person'] == "me" ) {
 				// Outgoing Message
 				
 				// Author
-				$htmlMarkup .= '<div class="CV-message-author ' . $outgoingAuthor_classes . '" style="' . $outgoingAuthor_styles .'">';
-				$htmlMarkup .= ucwords($msg['person']); // Print author name with Title Case
+				$htmlMarkup .= '<div class="CV-message-author ' . esc_attr($outgoingAuthor_classes)
+					. '" style="' . esc_attr($outgoingAuthor_styles) .'">';
+				$htmlMarkup .= esc_html(ucwords($msg['person'])); // Print author name with Title Case
 				$htmlMarkup .= '</div>'; // Closing Author 
 				
 				// Message
-				$htmlMarkup .= '<div class="CV-message CV-outgoing ' 
-					. $outgoingMessage_classes . ' ' . $clickableClassIdentifier . '" style="' . $outgoingMessage_styles .'">';
-				$htmlMarkup .= $msg['message'];
+				$htmlMarkup .= '<div class="CV-message CV-outgoing ' . esc_attr($outgoingMessage_classes)
+					. ' ' . esc_attr($clickableClassIdentifier) . '" style="' . esc_attr($outgoingMessage_styles) .'">';
+				$htmlMarkup .= esc_html($msg['message']);
 				$htmlMarkup .= '</div>';
 				
 			}
 			elseif ($msg['person'] == "command") {
 				// Message Command
-				$htmlMarkup .= '<div class="msg-command ' . $command_classes . '" style="' . $command_styles . '">' . $msg['message'] . '</div>';
+				$htmlMarkup .= '<div class="msg-command ' . esc_attr($command_classes) 
+				. '" style="' . esc_attr($command_styles) . '">' . esc_html($msg['message']) . '</div>';
 			}
 			else {
 				// Incoming Message
 				
 				// Author
-				$htmlMarkup .= '<div class="CV-message-author ' . $incomingAuthor_classes . '" style="' . $incomingAuthor_styles . 
-				$this->snapchatColourOverride(0, $msg['uniqueColor']) .'">';
-				$htmlMarkup .= ucwords($msg['person']); // Print author name with Title Case
+				$htmlMarkup .= '<div class="CV-message-author ' . esc_attr($incomingAuthor_classes) 
+					. '" style="' . esc_attr($incomingAuthor_styles) . 
+				esc_attr($this->snapchatColourOverride(0, $msg['uniqueColor'])) .'">';
+				$htmlMarkup .= esc_html(ucwords($msg['person'])); // Print author name with Title Case
 				$htmlMarkup .= '</div>'; // Closing Author 
 				
 				// Message
-				$htmlMarkup .= '<div class="CV-message ' . $incomingMessage_classes . ' ' . $clickableClassIdentifier . '" style="' 
-				. $incomingMessage_styles . $this->snapchatColourOverride(1, $msg['uniqueColor']) .'">';
-				$htmlMarkup .= $msg['message'];
+				$htmlMarkup .= '<div class="CV-message ' . esc_attr($incomingMessage_classes) 
+				. ' ' . esc_attr($clickableClassIdentifier) . '" style="' 
+				. esc_attr($incomingMessage_styles) . esc_attr($this->snapchatColourOverride(1, $msg['uniqueColor'])) .'">';
+				$htmlMarkup .= esc_html($msg['message']);
 				$htmlMarkup .= '</div>';
 			}
 			
@@ -370,11 +372,11 @@ class CVConversation {
 		 if ($this->isClickable and $this->isClickable != "false" and $this->styleUsed != "snap") {
 		    // Snap doesn't need to be clickable, it has the color options
 			
-		    // Strip methods to include into a unique array
+		    // Strip methods so we're not including duplicates
 		    $methodsToInclude = array_unique($methodsToInclude);
 		    
 		    $print = "<script>";
-			foreach($methodsToInclude as $method ) {
+			foreach($methodsToInclude as $method ) { // Include javascript methods for clickability
 				$print .= $method;
 			}
 			$print .= "</script>";
@@ -403,13 +405,13 @@ class CVConversation {
 	// Return Methods --------------------------------------------------------------------------------------------------------------
 	
 	public function getJSON( $wrappedInHtml = false ) {
-		if ($wrappedInHtml) {
+		if ($wrappedInHtml) { // If true, wrap the pretty-print JSON in a pre and a code.
 			return '<pre><code class="json">' . $this->jsonString . '</code></pre>';
 		}
 		return $this->jsonString;
 	}
 	
-	public function getHTML() {
+	public function getHTML() { // Return the built HTML markup for the conversation
 		return $this->cvBuildHtmlMarkup();
 	}  	 
 	
