@@ -14,21 +14,19 @@ add_shortcode( 'conversationViewer', 'createConversationViewerShortcode' );
 add_action( 'wp_head', 'conversationViewerHookHeader' );
 
 // Methods
-
 function enqueueConversationViewerScriptsAndStyles() {
     // Enqueue the CSS and Javascript for WP
 	wp_enqueue_style( 'ConversationViewerPlugin_Main_Style', plugins_url( '/css/main.css', __FILE__ ), false, false, 'all' );
     wp_enqueue_script('ConversationViewerPlugin_JavaScript', plugins_url( '/js/main.js', __FILE__ ), array('jquery'), true);    
 }
 
-
 function conversationViewerHookHeader() {
-	echo "<!-- This site uses the Conversation Viewer plugin: Visit http://ryderdamen.com/conversation-viewer for more information. -->";
+	$CVattributionString = "This site uses the Conversation Viewer plugin: Visit http://ryderdamen.com/conversation-viewer for more information.";
+	echo "<!-- " . $CVattributionString . " -->";
 }
 
-
-function createConversationViewerShortcode( $atts ) {
-        
+function createConversationViewerShortcode( $atts, $content = null ) {
+    // Creates the shortcode    
     include_once( plugin_dir_path( __FILE__ ) . "Conversation.php");
     
     // Set attributes and defaults
@@ -47,16 +45,14 @@ function createConversationViewerShortcode( $atts ) {
 		'conversationViewer'
     );
     
-    $conversation = new CVConversation($atts);
+    $conversation = new CVConversation($atts, $content);
     
     if (htmlspecialchars($atts['json']) != false and htmlspecialchars($atts['json']) != "false"  and htmlspecialchars($atts['json']) != "") {
-	    // Return JSON
-	    
+	    // If the user wants JSON, Return JSON
 	    return $conversation->getJSON(true);
-	    
     }
-
+    
+	// Return the stylized HTML
 	return $conversation->getHTML();
-	
 }
 

@@ -1,5 +1,10 @@
 <?php
 	
+	// Conversation Viewer
+	// Author: Ryder Damen
+	// Version: 1.0
+	// Description: This class provides the main functionality of the plugin, it converts a shortcode to a stylized conversation
+	
  
 class CVConversation {
 	
@@ -17,10 +22,10 @@ class CVConversation {
  
 	// Constructor --------------------------------------------------------------------------------------------------------------------
 	
-	public function __construct($shortcodeAttributes) {
+	public function __construct($shortcodeAttributes, $shortcodeContent) {
 		
 		// Sanitize Shortcode Parameters
-		$sanitizedShortcodeParameters = $this->cvSanitizeShortcodeParameters($shortcodeAttributes);
+		$sanitizedShortcodeParameters = $this->cvSanitizeShortcodeParameters($shortcodeAttributes, $shortcodeContent);
 		  
 		// Setting and Processing Parameters
 		$this->styleUsed = $sanitizedShortcodeParameters['style'];
@@ -144,10 +149,20 @@ class CVConversation {
 		  
 	}
 	
-	private function cvSanitizeShortcodeParameters($shortcodeAttributes) {
+	private function cvSanitizeShortcodeParameters($shortcodeAttributes, $shortcodeContent) {
 		// Sanitizes the shortcode Parameters
 		 
+		 
+		 // Content
 		$shortcodeAttributes['conversation'] = htmlspecialchars($shortcodeAttributes['conversation']);
+		
+		if ($shortcodeAttributes['conversation'] == "") {
+			// Use the content from in between the shortcode tags; else, use the content from within the tags
+			// This supports version 1.0
+			$shortcodeAttributes['conversation'] = htmlspecialchars($shortcodeContent);
+		}
+		
+		// Attributes
 		$shortcodeAttributes['style'] = htmlspecialchars($shortcodeAttributes['style']);
 		$shortcodeAttributes['delimiter'] = $shortcodeAttributes['delimiter']; // Not yet sanitized
 		$shortcodeAttributes['json'] = htmlspecialchars($shortcodeAttributes['json']);
@@ -170,7 +185,7 @@ class CVConversation {
 	
 	private function assignConversationStyles() {
 		
-		// Inline Style Overrides (Setting Variables)
+		// Inline Style Overrides (Initializing Variables)
 		$mainContainer_styles = "";
 		$messageContainer_styles = "";
 		$incomingAuthor_styles = "";
@@ -179,11 +194,10 @@ class CVConversation {
 		$outgoingMessage_styles = "";
 		$command_styles = "";
 		
-		// Pass in any inline style overrides here
-		
+		// Inline Style Overrides
 		if ($this->styleUsed == "whatsapp" ) {
 			// Set the background (only as a default)
-			$mainContainer_styles = " background: url('" . plugin_dir_url( __FILE__ ) . "assets/whatsapp_background.png" . "'); padding: 50px; ";
+			$mainContainer_styles = " background: url('" . plugin_dir_url( __FILE__ ) . "lib/whatsapp_background.png" . "'); padding: 50px; ";
 		}
 		
 		if ($this->mainContainerHex != "default") {
