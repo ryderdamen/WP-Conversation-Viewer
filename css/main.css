@@ -1,8 +1,10 @@
-/** Ryder Damen - http://ryderdamen.com
-
-
+/** 
+	Conversation Viewer - WordPress Plugin
+	Version: 1.0
+	Author: Ryder Damen
+	http://ryderdamen.com/convesation-viewer
+	https://github.com/ryderdamen/WP-Conversation-Viewer
 */
-
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:300');
 
@@ -62,30 +64,23 @@
 ****************************************/
 
 .CV-mainContainer-facebook {
-	
 }
 
-.CV-messageContainer-facebook {
-	
+.CV-messageContainer-facebook {	
 }
 
 .CV-incomingAuthor-facebook {
-	
 	width: 100%;
     text-align: left;
     font-size: 0.7em;
     margin-top: 1em;
-    
 }
 
 .CV-outgoingAuthor-facebook {
-	
 	display: none;
-	
 }
 
 .CV-incomingMessage-facebook {
-	
 	font-family: 'Roboto', sans-serif;    
     font-weight: 300;
     background-color: #f8f8f8;
@@ -98,7 +93,6 @@
 }
 
 .CV-outgoingMessage-facebook {
-	
 	font-family: 'Roboto', sans-serif;    
     font-weight: 300;
     background-color: #0084ff;
@@ -108,11 +102,9 @@
     border-bottom-left-radius: 1.3em;
     border-top-left-radius: 1.3em;
     margin-top: 2em;
-	
 }
 
 .CV-command-facebook {
-	
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
 	width: 100%;
@@ -120,40 +112,32 @@
     font-size: 0.7em;
     margin-top: 2em;
     margin-bottom: 1em;
-	
 }
+
+
 
 /***************************************
 			Android Styles
 ****************************************/
 
 .CV-mainContainer-android {
-	
-    
 }
 
 .CV-messageContainer-android {
-	
-	
 }
 
 .CV-incomingAuthor-android {
-	
 	width: 100%;
     text-align: left;
     font-size: 0.7em;
     margin-top: 1em;
-	
 }
 
 .CV-outgoingAuthor-android {
-	
 	display: none;
-	
 }
 
 .CV-incomingMessage-android {
-	
 	font-family: 'Roboto', sans-serif; 
     font-weight: 300;   
     background-color: #9C27B0;
@@ -162,11 +146,9 @@
     border-top-right-radius: 1.3em;
     border-bottom-left-radius: 1.3em;
     border-top-left-radius: 1.3em;
-	
 }
 
 .CV-outgoingMessage-android {
-	
 	font-family: 'Roboto', sans-serif;
     font-weight: 300;    
     background-color: #f8f8f8;
@@ -176,11 +158,9 @@
     border-bottom-left-radius: 1.3em;
     border-top-left-radius: 1.3em;
     margin-top: 2em;
-	
 }
 
 .CV-command-android {
-	
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
 	width: 100%;
@@ -188,8 +168,8 @@
     font-size: 0.7em;
     margin-top: 2em;
     margin-bottom: 1em;
-	
 }
+
 
 
 /***************************************
@@ -197,30 +177,23 @@
 ****************************************/
 
 .CV-mainContainer-ios {
-	
 }
 
 .CV-messageContainer-ios {
-	
 }
 
 .CV-incomingAuthor-ios {
-	
 	width: 100%;
     text-align: left;
     font-size: 0.7em;
     margin-top: 1em;
-	
 }
 
 .CV-outgoingAuthor-ios {
-	
 	display: none;
-	
 }
 
 .CV-incomingMessage-ios {
-	
 	font-family: 'Roboto', sans-serif;    
     font-weight: 300;
     background-color: #dfdfdf;
@@ -229,11 +202,9 @@
     border-top-right-radius: 1.3em;
     border-bottom-left-radius: 1.3em;
     border-top-left-radius: 1.3em;
-	
 }
 
 .CV-outgoingMessage-ios {
-	
 	font-family: 'Roboto', sans-serif;    
     font-weight: 300;
     background-color: #5BC236;
@@ -243,11 +214,9 @@
     border-bottom-left-radius: 1.3em;
     border-top-left-radius: 1.3em;
     margin-top: 2em;
-	
 }
 
 .CV-command-ios {
-	
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
 	width: 100%;
@@ -255,7 +224,6 @@
     font-size: 0.7em;
     margin-top: 2em;
     margin-bottom: 1em;
-	
 }
 
 
@@ -264,36 +232,28 @@
 			WhatsApp Styles
 ****************************************/
 
+
 .CV-mainContainer-whatsapp {
-	
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
-	
-	
 }
 
 .CV-messageContainer-whatsapp {
-	
 }
 
 .CV-incomingAuthor-whatsapp {
-	
 	width: 100%;
     text-align: left;
     font-size: 0.7em;
     margin-top: 1em;
-	
 }
 
 .CV-outgoingAuthor-whatsapp {
-	
 	display: none;
-	
 }
 
 .CV-incomingMessage-whatsapp {
-	
 	font-family: 'Roboto', sans-serif; 
     font-weight: 300;   
     background-color: #f8f8f8;
@@ -302,11 +262,9 @@
     border-top-right-radius: 0.3em;
     border-bottom-left-radius: 0.3em;
     border-top-left-radius: 0.3em;
-	
 }
 
 .CV-outgoingMessage-whatsapp {
-	
 	font-family: 'Roboto', sans-serif;
     font-weight: 300;    
     background-color: #DCF8C6;
@@ -316,11 +274,9 @@
     border-bottom-left-radius: 0.3em;
     border-top-left-radius: 0.3em;
     margin-top: 2em;
-	
 }
 
 .CV-command-whatsapp {
-	
 	background-color: #f7ef7e;
 	padding: 1em;
 	font-family: 'Roboto', sans-serif;
@@ -329,7 +285,6 @@
     font-size: 0.7em;
     margin-top: 2em;
     margin-bottom: 1em;
-	
 }
 
 
@@ -339,33 +294,26 @@
 ****************************************/
 
 .CV-mainContainer-snapchat {
-	
 	margin-top: 1em;
-	
 }
 
 .CV-messageContainer-snapchat {
-	
 }
 
 .CV-incomingAuthor-snapchat {
-	
 	width: 100%;
     text-align: left;
     font-size: 0.7em;	
-	
 }
 
 .CV-outgoingAuthor-snapchat {
-	
 	width: 100%;
     text-align: left;
     font-size: 0.7em;	
-	
+    color: #cc0000;
 }
 
 .CV-incomingMessage-snapchat {
-	
 	font-family: 'Roboto', sans-serif; 
     font-weight: 300;   
     background-color: transparent;
@@ -373,11 +321,9 @@
     border-left-style: solid;
 	border-left-color: #cc0000;
 	border-left-width: 2px;
-	
 }
 
 .CV-outgoingMessage-snapchat {
-	
 	float: left;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;    
@@ -386,18 +332,15 @@
     border-left-style: solid;
 	border-left-color: #cc0000;
 	border-left-width: 2px;
-	
 }
 
 .CV-command-snapchat {
-	
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
 	width: 100%;
     text-align: center;
     font-size: 0.7em;
     margin-top: 2em;
-	
 }
 
 
