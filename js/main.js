@@ -1,5 +1,6 @@
 // ConversationViewer
 // Author: Ryder Damen (http://ryderdamen.com/conversation-viewer)
+// Version: 1.0
 
 var $ = jQuery;
 	
