@@ -58,7 +58,9 @@ There are three parts to adding a new line or speech bubble:
 * The Name
 * The Message
 
-First, start off with the delimiter, which is two slashes. After which you can write the name of the person sending the message. Then, a colon to indicate the message has started, and then, your message.
+First, start off with the delimiter, which is two forward slashes by default. After that, write the name of the person sending the message. Then, a colon `````:````` to indicate the message has started, and then, your message.
+
+````` // Name : Message `````
 
 ### The "Me" Tag (Outgoing Messages)
 For a chat bubble to appear to be an "outgoing" message (usually on the right side of the conversation), you will need to use the "Me" tag (not case sensitive). When you use this tag, it will appear as though you sent the message.
