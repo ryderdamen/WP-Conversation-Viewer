@@ -23,7 +23,7 @@ Install either from the WordPress Plugin directory, or by downloading a zip of t
 
 // Someone Else: Hey, more than one person can join?
 
-// Me: Absolutely! As many people as you want, though you as the message-sender will always keep the right side of the conversation.
+// Me: Absolutely! As many people as you want, though "me" as the message-sender will always keep the right side of the conversation.
 
 // You: That's cool!
 
