@@ -20,7 +20,9 @@
 .CV-messages-container {
     max-width: 600px;
     margin: auto;
-     padding: 25px;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    padding: 25px;
 }
 
 /* Individual Message Container */
