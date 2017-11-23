@@ -48,7 +48,7 @@ class CVConversation {
 	    $personsInvolvedArray = array();
 	    
 	    if ($delimiter == "") {
-		    // TODO: Throw an exception
+		    throw new Exception("Your delimiter cannot be nothing. Please change it in your shortcode, or remove the parameter entirely.");
 	    }
 	
 	    // Split the conversation array into individual messages
@@ -56,13 +56,12 @@ class CVConversation {
 	    	$explodedInput = explode($delimiter, $inputString);
 	    }
 	    catch (Exception $e){
-		   // Throw an exception?
-		   
+		   // Just in case
+		   throw new Exception("Sorry, this appears to be an invalid conversation. Please add more. ");  
 	    }
 	
 	    if (!is_array($explodedInput)) {
-	        // There was only one part to the conversation, do nothing
-	        // Throw an exception
+	         throw new Exception("Sorry, this appears to be an invalid conversation. Please add more. ");
 	    }
 	
 	    $sanitizedMessagesArray = array(); // Initialize a messagesArray
@@ -151,7 +150,7 @@ class CVConversation {
 	}
 	
 	private function cvSanitizeShortcodeParameters($shortcodeAttributes, $shortcodeContent) {
-		// Sanitizes the shortcode Parameters
+		// Sanitizes and processes the shortcode Parameters
 		 
 		 // Content
 		$shortcodeAttributes['conversation'] = htmlspecialchars($shortcodeAttributes['conversation']);
@@ -164,7 +163,8 @@ class CVConversation {
 		
 		// Attributes
 		$shortcodeAttributes['style'] = htmlspecialchars($shortcodeAttributes['style']);
-		$shortcodeAttributes['delimiter'] = $shortcodeAttributes['delimiter'];
+		$shortcodeAttributes['delimiter'] = str_replace("'", "/", str_replace('"', "/", 
+		$shortcodeAttributes['delimiter'])); // No Quotations allowed in delimiter
 		$shortcodeAttributes['json'] = htmlspecialchars($shortcodeAttributes['json']);
 		$shortcodeAttributes['width'] = filter_var($shortcodeAttributes['width'], FILTER_VALIDATE_INT);
 		$shortcodeAttributes['padding'] = filter_var($shortcodeAttributes['padding'], FILTER_VALIDATE_INT);

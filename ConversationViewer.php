@@ -22,7 +22,7 @@ function enqueueConversationViewerScriptsAndStyles() {
 
 function conversationViewerHookHeader() {
 	$CVattributionString = "This site uses the Conversation Viewer plugin: Visit http://ryderdamen.com/conversation-viewer for more information.";
-	echo "<!-- " . $CVattributionString . " -->";
+	echo "<!-- " . esc_html($CVattributionString) . " -->";
 }
 
 function createConversationViewerShortcode( $atts, $content = null ) {
@@ -45,14 +45,23 @@ function createConversationViewerShortcode( $atts, $content = null ) {
 		'conversationViewer'
     );
     
-    $conversation = new CVConversation($atts, $content);
-    
-    if (htmlspecialchars($atts['json']) != false and htmlspecialchars($atts['json']) != "false"  and htmlspecialchars($atts['json']) != "") {
-	    // If the user wants JSON, Return JSON
-	    return $conversation->getJSON(true);
-    }
-    
-	// Return the stylized HTML
-	return $conversation->getHTML();
+    try {
+    	$conversation = new CVConversation($atts, $content);
+    	
+	    if ( htmlspecialchars($atts['json']) != false and 
+	    	 htmlspecialchars($atts['json']) != "false"  and 
+	    	 htmlspecialchars($atts['json']) != "") {
+		    // If the user wants JSON, Return JSON
+		    return $conversation->getJSON(true);
+	    }
+	    
+		// Return the stylized HTML
+		return $conversation->getHTML();
+		
+	}
+	catch (Exception $e) {
+		$CvErrorString = "Conversation Viewer Error: ";
+		return "<strong>" . esc_html($CvErrorString . $e->getMessage()) . "</strong>";
+	}
 }
 
