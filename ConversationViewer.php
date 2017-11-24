@@ -1,10 +1,11 @@
 <?php
 /*
-Plugin Name: Conversation Viewer
+Plugin Name: Conversation Viewer - Display Chat Bubbles
 Plugin URI: http:/ryderdamen.com/conversation-viewer
 Description: A plugin for displaying conversations in WordPress, like in their original messaging apps.
 Version: 1.0
 Author: Ryder Damen
+Author URI: http://ryderdamen.com
 */
 
 
