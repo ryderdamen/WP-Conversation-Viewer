@@ -1,11 +1,11 @@
 === Conversation Viewer - Display Chat Bubbles ===
 Contributors: ryderdamen
 Donate link: http://ryderdamen.com/buy-me-a-beer
-Tags: Conversation Viewer, Chat bubble, speech bubble, facebook messenger, messenger, whatsapp, texting, ios messages, snapchat, conversation viewer, chat simulator
+Tags: Conversation Viewer, Chat bubble, speech bubble, chat bubbles, facebook messenger, messenger, whatsapp, texting, ios messages, snapchat, chat simulator
 Requires at least: 3.0.1
-Tested up to: 3.4
+Tested up to: 4.9
 Requires PHP: 5.6.32
-Stable tag: 4.3
+Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
  
