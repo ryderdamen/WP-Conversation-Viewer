@@ -197,7 +197,9 @@ class CVConversation {
 		// Inline Style Overrides
 		if ($this->styleUsed == "whatsapp" ) {
 			// Set the background (only as a default)
-			$mainContainer_styles = " background: url('" . plugin_dir_url( __FILE__ ) . "lib/whatsapp_background.png" . "'); padding: 50px; ";
+			// This used to be a whatsApp image, but I'm using a hex code right now due to licensing.
+			// I'll make a fake whatsapp background image when I'm less lazy // TODO
+			$mainContainer_styles = " background-color: #e5ddd5; padding: 50px; ";
 		}
 		
 		if ($this->mainContainerHex != "default") {
