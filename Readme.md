@@ -292,3 +292,19 @@ The JSON Output of this function is as follows:
 
 ## Questions?
 If you have any questions or feature requests, please feel free to send me a message.
+
+Styles I'm considering building:
+* slack
+* line
+* skype
+* generic grey
+* bbm
+* tinder is basically the same as facebook
+* 
+
+Features I'm considering building:
+* images
+* timestamps
+* container border
+* headers and footers
+* CSS phone wrapper border
