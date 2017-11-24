@@ -2,9 +2,9 @@
 Contributors: ryderdamen
 Donate link: http://ryderdamen.com/buy-me-a-beer
 Tags: Conversation Viewer, Chat bubble, speech bubble, chat bubbles, facebook messenger, messenger, whatsapp, texting, ios messages, snapchat, chat simulator
-Requires at least: 3.0.1
+Requires at least: 3.8
 Tested up to: 4.9
-Requires PHP: 5.6.32
+Requires PHP: 5.6
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -21,11 +21,7 @@ Conversation Viewer is a responsive WordPress plugin for displaying chat convers
 * WhatsApp
 * Snapchat
 
-With responsive CSS, these conversations look great on all screens, are more responsive and accessible than uploading screenshots. 
- 
-Markdown parsed.
-  
-  
+With responsive CSS, these conversations look great on all screens, are more responsive and accessible than uploading screenshots.  
   
 == Installation ==
  
@@ -43,7 +39,7 @@ For the complete documentation on how to do everything including example code, v
  
 = Where can I find more info on this plugin? =
  
-Check the [GitHub Repository](https://github.com/ryderdamen/WP-Conversation-Viewer "GitHub Repository") for more information on Conversation Viewer.
+Check the [GitHub Repository](https://github.com/ryderdamen/WP-Conversation-Viewer "GitHub Repository") for more information on Conversation Viewer and how to use it.
  
 = How do I change styles? =
  
@@ -58,8 +54,8 @@ To change styles, simply use the style selector in the opening tag of the shortc
 == Screenshots ==
  
 1. An example of the plugin in action, using the default messenger style.
-2. An example of the plugin using android style, with clickability enabled.
-3. An example of the plugin using snapchat style.
+2. An example of the plugin using snapchat style.
+3. An example of the plugin using whatsapp style.
  
 == Changelog ==
  
