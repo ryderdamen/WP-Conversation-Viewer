@@ -57,11 +57,11 @@ class CVConversation {
 	    }
 	    catch (Exception $e){
 		   // Just in case
-		   throw new Exception("Sorry, this appears to be an invalid conversation. Please add more. ");  
+		   throw new Exception("Sorry, this appears to be an invalid conversation. Please add more, or update your shortcode. ");  
 	    }
 	
 	    if (!is_array($explodedInput)) {
-	         throw new Exception("Sorry, this appears to be an invalid conversation. Please add more. ");
+	         throw new Exception("Sorry, this appears to be an invalid conversation. Please add more, or update your shortcode. ");
 	    }
 	
 	    $sanitizedMessagesArray = array(); // Initialize a messagesArray

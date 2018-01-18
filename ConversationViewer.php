@@ -39,6 +39,7 @@ function createConversationViewerShortcode( $atts, $content = null ) {
             'json' => false,
             'background' => 'default',
             'clickable' => false,
+            'defaultname' => null, // A default highlighted name for the clickability option // TODO: Build into class
             'width' => '600',
             'padding' => '25',
 		), 

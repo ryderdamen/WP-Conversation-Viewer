@@ -308,3 +308,8 @@ Features I'm considering building:
 * container border
 * headers and footers
 * CSS phone wrapper border
+
+## TODO (For Ryder)
+* build out thumbnail options
+* build out timestamp options
+* add in ability to select a default highlighted person
