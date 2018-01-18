@@ -44,6 +44,14 @@
 
 } 
 
+/* Message Profile Photo */
+.CV-message-profile {
+	width: 50px;
+	height: 50px;
+	background: green;
+	float: left;
+}
+
 /* Message Author */
 .CV-message-author {
     
@@ -52,6 +60,15 @@
 /* Outgoing Messages */
 .CV-outgoing {
     float: right;
+}
+
+/* Profile Photos */
+.CV-incomingMessagePhoto {
+	
+}
+
+.CV-incomingMessagePhoto-hidden {
+	display: none;
 }
 
 
@@ -69,13 +86,13 @@
 }
 
 .CV-messageContainer-facebook {	
+	margin-top: 1em;
 }
 
 .CV-incomingAuthor-facebook {
 	width: 100%;
     text-align: left;
     font-size: 0.7em;
-    margin-top: 1em;
 }
 
 .CV-outgoingAuthor-facebook {
@@ -114,6 +131,19 @@
     font-size: 0.7em;
     margin-top: 2em;
     margin-bottom: 1em;
+}
+
+/* Message Profile Photo */
+.CV-incomingMessagePhoto-facebook {
+	width: 40px;
+	height: 40px;
+	background: #f8f8f8;
+	-moz-border-radius: 40px;
+	-webkit-border-radius: 40px;
+	border-radius: 40px;
+	float: left;
+	margin-right: 1em;
+	margin-top: 1em;
 }
 
 
@@ -172,6 +202,18 @@
     margin-bottom: 1em;
 }
 
+.CV-incomingMessagePhoto-android {
+	width: 45px;
+	height: 45px;
+	background: red;
+	-moz-border-radius: 45px;
+	-webkit-border-radius: 45px;
+	border-radius: 45px;
+	float: left;
+	margin-right: 1em;
+	margin-top: 1em;
+}
+
 
 
 /***************************************
@@ -226,6 +268,18 @@
     font-size: 0.7em;
     margin-top: 2em;
     margin-bottom: 1em;
+}
+
+.CV-incomingMessagePhoto-ios {
+	width: 45px;
+	height: 45px;
+	background: red;
+	-moz-border-radius: 45px;
+	-webkit-border-radius: 45px;
+	border-radius: 45px;
+	float: left;
+	margin-right: 1em;
+	margin-top: 1em;
 }
 
 
@@ -289,6 +343,18 @@
     margin-bottom: 1em;
 }
 
+.CV-incomingMessagePhoto-whatsapp {
+	width: 45px;
+	height: 45px;
+	background: red;
+	-moz-border-radius: 45px;
+	-webkit-border-radius: 45px;
+	border-radius: 45px;
+	float: left;
+	margin-right: 1em;
+	margin-top: 1em;
+}
+
 
 
 /***************************************
@@ -343,6 +409,10 @@
     text-align: center;
     font-size: 0.7em;
     margin-top: 2em;
+}
+
+.CV-incomingMessagePhoto-snapchat {
+	display: none;
 }
 
 
