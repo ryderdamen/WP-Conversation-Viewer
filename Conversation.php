@@ -12,12 +12,14 @@ class CVConversation {
 	
 	public $peopleInvolved = array();
 	public $sanitizedMessages = array();
+	public $profilePhotosArray = array();
 	public $styleUsed = null;
 	public $jsonString = null;
 	public $isClickable = false;
 	private $mainContainerWidth = "600";
 	private $mainContainerHex = "";
 	private $mainContainerPadding = 25;
+	private $profileImagesUsed = false;
   
  
 	// Constructor --------------------------------------------------------------------------------------------------------------------
@@ -50,12 +52,17 @@ class CVConversation {
 	    if ($delimiter == "") {
 		    throw new Exception("Your delimiter cannot be nothing. Please change it in your shortcode, or remove the parameter entirely.");
 	    }
+	    
+	    // URL Hack-Around
+	    // If there is a URL Present (IE contains http://google.ca) replace the // with a ## to avoid messing with the explode function
+	    // This will later be fixed back to a regular URL when printing. when printing
+		$inputString = str_replace('http://', 'http:&&', $inputString);
+		$inputString = str_replace('https://', 'https:&&', $inputString);
+	
 	
 	    // Split the conversation array into individual messages
 	    try {
-	    	$explodedInput = explode( $delimiter, $inputString);
-// 	    	$explodedInput = preg_match('(\r\n|\r|\n)\/\/', $inputString);
-// #[Image] (Someone Else) (http://google.ca) // TODO: Figure this out
+	    	$explodedInput = explode( $delimiter, $inputString);	    	
 	    }
 	    catch (Exception $e){
 		   // Just in case
@@ -71,6 +78,11 @@ class CVConversation {
 	
 	    foreach($explodedInput as $piece) {
 	        // For each piece of the conversation
+	        
+	        // Return URLs to Normal (if they are present in the array)
+	        $piece = str_replace('http:&&', 'http://', $piece);
+			$piece = str_replace('https:&&', 'https://', $piece);
+	        
 	        	        
 	        if (	substr($piece, 0, 6) == ' image' or 
 	        		substr($piece, 0, 6) == ' Image' or 
@@ -79,8 +91,30 @@ class CVConversation {
 	        		substr($piece, 0, 5) == 'Image' or
 	        		substr($piece, 0, 5) == 'IMAGE'
 	        	) {
+		        		        	
 		        // If this is an image URL, append it to a separate array, then continue the loop ( //image name http://example.com )
-		        echo "RYDEBUG: AN IMAGE HAS BEEN USED";
+		        // The layout for this command is as follows:     // Image [Person's Name] [http://example.com/example-image.jpeg]
+		        
+		        $this->profileImagesUsed = true;
+
+				// Search for matches in the square bracket format
+				
+				try {		        
+		        	preg_match_all('/\[(.*?)\]/', $piece, $matches);
+					$matches = $matches[1];
+					$profilePhoto_name = $matches[0];
+					$profilePhoto_url = $matches[1];
+		        
+			        // Append to the profilePhotosArray[]
+			        $this->profilePhotosArray[] = array(
+				        'name' => $profilePhoto_name,
+				        'url' => $profilePhoto_url,
+			        );
+			    }
+			    catch (Exception $e) { // If the square bracket format is malformed, throw a new exception for print
+				    throw new Exception("There appears to be an error in your \"// Image\" command.");
+			    }
+		        
 		        continue; // Continue the loop
 	        }
 	        
