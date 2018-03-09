@@ -1,7 +1,7 @@
 <?php
 	
 	// Conversation Viewer
-	// Author: Ryder Damen
+	// Author: Ryder Damen | ryderdamen.com
 	// Version: 1.0
 	// Description: This class provides the main functionality of the plugin, it converts a shortcode to a stylized conversation
 	
@@ -54,7 +54,7 @@ class CVConversation {
 	    }
 	    
 	    // URL Hack-Around
-	    // If there is a URL Present (IE contains http://google.ca) replace the // with a ## to avoid messing with the explode function
+	    // If there is a URL Present (IE contains http://google.ca) replace the // with a && to avoid messing with the explode function
 	    // This will later be fixed back to a regular URL when printing. when printing
 		$inputString = str_replace('http://', 'http:&&', $inputString);
 		$inputString = str_replace('https://', 'https:&&', $inputString);
@@ -92,7 +92,7 @@ class CVConversation {
 	        		substr($piece, 0, 5) == 'IMAGE'
 	        	) {
 		        		        	
-		        // If this is an image URL, append it to a separate array, then continue the loop ( //image name http://example.com )
+		        // If this is an image URL, append it to a separate array, then continue the loop
 		        // The layout for this command is as follows:     // Image [Person's Name] [http://example.com/example-image.jpeg]
 		        
 		        $this->profileImagesUsed = true;
@@ -407,9 +407,27 @@ class CVConversation {
 				// Incoming Message
 				
 				// Profile Photo
-				$htmlMarkup .= '<div class="CV-incomingMessagePhoto ' . esc_attr($incomingMessagePhoto_classes)
-					. '" style="' . esc_attr($incomingMessagePhoto_styles) . ' ">';
-				$htmlMarkup .= '</div>'; // Closing Profile Photo
+				// Only show if image tags have been provided
+				
+				if ( !empty( $this->profilePhotosArray ) ) {
+					
+					// Get the author's provided image by looping through the array
+					$imageUrl = "";
+					foreach ($this->profilePhotosArray as $person) {
+
+						if ( strtolower( $person['name'] )  == strtolower($msg['person']) ) {
+							$imageUrl = $person['url'];
+						}
+					}
+					
+					// If the author doesn't have a provided image, don't show the photo div
+					if ($imageUrl != "") {
+						$htmlMarkup .= '<div class="CV-incomingMessagePhoto ' . esc_attr($incomingMessagePhoto_classes)
+						. '" style="' . esc_attr($incomingMessagePhoto_styles) . ' background-image: url(' . $imageUrl . '); ">';
+						$htmlMarkup .= '</div>'; // Closing Profile Photo
+					}	
+					
+				}
 				
 				// Author
 				$htmlMarkup .= '<div class="CV-message-author ' . esc_attr($incomingAuthor_classes) 
@@ -475,7 +493,7 @@ class CVConversation {
 		return $this->jsonString;
 	}
 	
-	public function getHTML() { // Return the built HTML markup for the conversation
+	public function getHTML() { // Return the built HTML markup for the conversation		
 		return $this->cvBuildHtmlMarkup();
 	}  	 
 	

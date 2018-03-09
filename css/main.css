@@ -138,6 +138,9 @@
 	width: 40px;
 	height: 40px;
 	background: #f8f8f8;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
 	-moz-border-radius: 40px;
 	-webkit-border-radius: 40px;
 	border-radius: 40px;
@@ -205,7 +208,10 @@
 .CV-incomingMessagePhoto-android {
 	width: 45px;
 	height: 45px;
-	background: red;
+	background: #f8f8f8;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
 	-moz-border-radius: 45px;
 	-webkit-border-radius: 45px;
 	border-radius: 45px;
@@ -273,7 +279,10 @@
 .CV-incomingMessagePhoto-ios {
 	width: 45px;
 	height: 45px;
-	background: red;
+	background: #f8f8f8;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
 	-moz-border-radius: 45px;
 	-webkit-border-radius: 45px;
 	border-radius: 45px;
@@ -346,7 +355,10 @@
 .CV-incomingMessagePhoto-whatsapp {
 	width: 45px;
 	height: 45px;
-	background: red;
+	background: #f8f8f8;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
 	-moz-border-radius: 45px;
 	-webkit-border-radius: 45px;
 	border-radius: 45px;
