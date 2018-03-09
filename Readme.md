@@ -126,6 +126,27 @@ Within the shortcode, using the style="" selector, you can change the style to a
 * 	ios
 * 	android
 * 	snapchat
+
+### Profile photos
+Profile photos for each user can now be included on every style except snapchat. By default, profile photos will NOT be shown. To include them, simply provide the following image command for each particular person:
+
+`````
+// Image: [Name Of Person] [https://example.com/url-to-image/image.jpg]
+
+`````
+
+Now that an image is registered for that particular person, it will be shown for only them. If there are multiple other people in the conversation, their images will not be shown until they are registered. Image tags can go anywhere within the conversation, but I recommend putting them at the beginning like so:
+
+`````
+// Image: [George] [https://example.com/images/george.jpg]
+// Image: [Kathy] [https://example.com/images/kathy.jpg]
+
+// George: Hey there!
+// Kathy: Hello, wow, look at our profile pictures.
+// James: Awe, I don't have one, nobody registered one for me.
+
+
+`````
 	
 ### Clickability
 To help your readers identify who's speaking, you can enable JavaScript clickability. When they click on a person, all messages sent by them will highlight. Just set the clickable="" selector to anything you want. Clickability is not available with the snapchat style (since the colours make it pretty clear who's speaking), and only extends to the current shortcode, not others on the page. 

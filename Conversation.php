@@ -1,7 +1,7 @@
 <?php
 	
 	// Conversation Viewer
-	// Author: Ryder Damen
+	// Author: Ryder Damen | ryderdamen.com
 	// Version: 1.0
 	// Description: This class provides the main functionality of the plugin, it converts a shortcode to a stylized conversation
 	
@@ -12,12 +12,14 @@ class CVConversation {
 	
 	public $peopleInvolved = array();
 	public $sanitizedMessages = array();
+	public $profilePhotosArray = array();
 	public $styleUsed = null;
 	public $jsonString = null;
 	public $isClickable = false;
 	private $mainContainerWidth = "600";
 	private $mainContainerHex = "";
 	private $mainContainerPadding = 25;
+	private $profileImagesUsed = false;
   
  
 	// Constructor --------------------------------------------------------------------------------------------------------------------
@@ -50,10 +52,17 @@ class CVConversation {
 	    if ($delimiter == "") {
 		    throw new Exception("Your delimiter cannot be nothing. Please change it in your shortcode, or remove the parameter entirely.");
 	    }
+	    
+	    // URL Hack-Around
+	    // If there is a URL Present (IE contains http://google.ca) replace the // with a && to avoid messing with the explode function
+	    // This will later be fixed back to a regular URL when printing. when printing
+		$inputString = str_replace('http://', 'http:&&', $inputString);
+		$inputString = str_replace('https://', 'https:&&', $inputString);
+	
 	
 	    // Split the conversation array into individual messages
 	    try {
-	    	$explodedInput = explode($delimiter, $inputString);
+	    	$explodedInput = explode( $delimiter, $inputString);	    	
 	    }
 	    catch (Exception $e){
 		   // Just in case
@@ -69,6 +78,45 @@ class CVConversation {
 	
 	    foreach($explodedInput as $piece) {
 	        // For each piece of the conversation
+	        
+	        // Return URLs to Normal (if they are present in the array)
+	        $piece = str_replace('http:&&', 'http://', $piece);
+			$piece = str_replace('https:&&', 'https://', $piece);
+	        
+	        	        
+	        if (	substr($piece, 0, 6) == ' image' or 
+	        		substr($piece, 0, 6) == ' Image' or 
+	        		substr($piece, 0, 6) == ' IMAGE' or
+	        		substr($piece, 0, 5) == 'image' or
+	        		substr($piece, 0, 5) == 'Image' or
+	        		substr($piece, 0, 5) == 'IMAGE'
+	        	) {
+		        		        	
+		        // If this is an image URL, append it to a separate array, then continue the loop
+		        // The layout for this command is as follows:     // Image [Person's Name] [http://example.com/example-image.jpeg]
+		        
+		        $this->profileImagesUsed = true;
+
+				// Search for matches in the square bracket format
+				
+				try {		        
+		        	preg_match_all('/\[(.*?)\]/', $piece, $matches);
+					$matches = $matches[1];
+					$profilePhoto_name = $matches[0];
+					$profilePhoto_url = strip_tags( $matches[1] ); // Strip tags in case WP automatically makes this an anchor
+		        
+			        // Append to the profilePhotosArray[]
+			        $this->profilePhotosArray[] = array(
+				        'name' => $profilePhoto_name,
+				        'url' => $profilePhoto_url,
+			        );
+			    }
+			    catch (Exception $e) { // If the square bracket format is malformed, throw a new exception for print
+				    throw new Exception("There appears to be an error in your \"// Image\" command.");
+			    }
+		        
+		        continue; // Continue the loop
+	        }
 	        
 	        $explodedPiece = explode(':', $piece, 2); // Separate the person from the message, ignore everything after the first colon
 	        $personCharacterArray = str_split($explodedPiece[0]); // Explode into single characters
@@ -191,8 +239,11 @@ class CVConversation {
 		$incomingAuthor_styles = "";
 		$outgoingAuthor_styles = "";
 		$incomingMessage_styles = "";
+		$incomingMessagePhoto_styles = "";
 		$outgoingMessage_styles = "";
 		$command_styles = "";
+		
+		// TODO: If there is a profile photo assigned for this person, use it.
 		
 		// Inline Style Overrides
 		if ($this->styleUsed == "whatsapp" ) {
@@ -246,6 +297,7 @@ class CVConversation {
 		$outgoingAuthor_classes = "CV-outgoingAuthor-" . $styleAppendix;
 		$incomingMessage_classes = "CV-incomingMessage-" . $styleAppendix;
 		$outgoingMessage_classes = "CV-outgoingMessage-" . $styleAppendix;
+		$incomingMessagePhoto_classes = "CV-incomingMessagePhoto-" . $styleAppendix;
 		$command_classes = "CV-command-" . $styleAppendix;
 				
 		
@@ -264,7 +316,9 @@ class CVConversation {
 			'outgoingMessage_styles' => $outgoingMessage_styles,
 			'outgoingMessage_classes' => $outgoingMessage_classes,
 			'command_styles' => $command_styles,
-			'command_classes' => $command_classes
+			'command_classes' => $command_classes,
+			'incomingMessagePhoto_styles' => $incomingMessagePhoto_styles,
+			'incomingMessagePhoto_classes' => $incomingMessagePhoto_classes
 		);
 			
 	}
@@ -294,6 +348,9 @@ class CVConversation {
 		
 		$outgoingMessage_styles = $SSA['outgoingMessage_styles'];
 		$outgoingMessage_classes = $SSA['outgoingMessage_classes'];
+		
+		$incomingMessagePhoto_styles = $SSA['incomingMessagePhoto_styles'];
+		$incomingMessagePhoto_classes = $SSA['incomingMessagePhoto_classes'];
 		
 		$command_styles = $SSA['command_styles'];
 		$command_classes = $SSA['command_classes'];
@@ -348,6 +405,29 @@ class CVConversation {
 			}
 			else {
 				// Incoming Message
+				
+				// Profile Photo
+				// Only show if image tags have been provided
+				
+				if ( !empty( $this->profilePhotosArray ) ) {
+					
+					// Get the author's provided image by looping through the array
+					$imageUrl = "";
+					foreach ($this->profilePhotosArray as $person) {
+
+						if ( strtolower( $person['name'] )  == strtolower($msg['person']) ) {
+							$imageUrl = $person['url'];
+						}
+					}
+					
+					// If the author doesn't have a provided image, don't show the photo div
+					if ($imageUrl != "") {
+						$htmlMarkup .= '<div class="CV-incomingMessagePhoto ' . esc_attr($incomingMessagePhoto_classes)
+						. '" style="' . esc_attr($incomingMessagePhoto_styles) . ' background-image: url(' . $imageUrl . '); ">';
+						$htmlMarkup .= '</div>'; // Closing Profile Photo
+					}	
+					
+				}
 				
 				// Author
 				$htmlMarkup .= '<div class="CV-message-author ' . esc_attr($incomingAuthor_classes) 
@@ -413,7 +493,7 @@ class CVConversation {
 		return $this->jsonString;
 	}
 	
-	public function getHTML() { // Return the built HTML markup for the conversation
+	public function getHTML() { // Return the built HTML markup for the conversation		
 		return $this->cvBuildHtmlMarkup();
 	}  	 
 	
