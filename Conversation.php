@@ -103,7 +103,7 @@ class CVConversation {
 		        	preg_match_all('/\[(.*?)\]/', $piece, $matches);
 					$matches = $matches[1];
 					$profilePhoto_name = $matches[0];
-					$profilePhoto_url = $matches[1];
+					$profilePhoto_url = strip_tags( $matches[1] ); // Strip tags in case WP automatically makes this an anchor
 		        
 			        // Append to the profilePhotosArray[]
 			        $this->profilePhotosArray[] = array(
