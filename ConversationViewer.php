@@ -15,17 +15,35 @@ add_shortcode( 'conversationViewer', 'createConversationViewerShortcode' );
 add_action( 'wp_head', 'conversationViewerHookHeader' );
 
 // Methods
+
+/**
+ * Enqueue styles and scripts for the plugin
+ *
+ * @return void
+ */
 function enqueueConversationViewerScriptsAndStyles() {
     // Enqueue the CSS and Javascript for WP
 	wp_enqueue_style( 'ConversationViewerPlugin_Main_Style', plugins_url( '/css/main.css', __FILE__ ), false, false, 'all' );
     wp_enqueue_script('ConversationViewerPlugin_JavaScript', plugins_url( '/js/main.js', __FILE__ ), array('jquery'), true);    
 }
 
+/**
+ * Echos an attribution string into the head of the site
+ *
+ * @return void
+ */
 function conversationViewerHookHeader() {
 	$CVattributionString = "This site uses the Conversation Viewer plugin: Visit http://ryderdamen.com/conversation-viewer for more information.";
 	echo "<!-- " . esc_html($CVattributionString) . " -->";
 }
 
+/**
+ * Handles the creation of the shortcode for the plugin
+ *
+ * @param array $atts
+ * @param string $content
+ * @return string html or json
+ */
 function createConversationViewerShortcode( $atts, $content = null ) {
     // Creates the shortcode    
     include_once( plugin_dir_path( __FILE__ ) . "Conversation.php");
@@ -51,7 +69,7 @@ function createConversationViewerShortcode( $atts, $content = null ) {
     	$conversation = new CVConversation($atts, $content);
     	
 	    if ( htmlspecialchars($atts['json']) != false and 
-	    	 htmlspecialchars($atts['json']) != "false"  and 
+	    	 htmlspecialchars($atts['json']) != "false" and 
 	    	 htmlspecialchars($atts['json']) != "") {
 		    // If the user wants JSON, Return JSON
 		    return $conversation->getJSON(true);
