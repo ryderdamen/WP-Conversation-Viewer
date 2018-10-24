@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/ryderdamen/WP-Conversation-Viewer.svg?style=shield)](https://circleci.com/gh/ryderdamen/WP-Conversation-Viewer)
 # ConversationViewer WordPress Plugin
 A plugin for displaying conversations in Wordpress, like in their original messaging apps.
 
