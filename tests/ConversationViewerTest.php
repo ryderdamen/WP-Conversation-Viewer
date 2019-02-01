@@ -1,8 +1,9 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-include(realpath(dirname(__FILE__) . '/requirements.php')); // Function overrides
-include(realpath(dirname(__FILE__) . '/helpers.php')); // Function overrides
+include( __DIR__ . '/requirements.php');
+include( __DIR__ . '/helpers.php' );
+include( __DIR__ . '/../src/Conversation.php' );
 
 
 /**
@@ -28,7 +29,6 @@ class ConversationViewerTest extends TestCase {
             'padding' => '25',
 		);
         $content = "// Me: This is test content";
-        include('Conversation.php');
         $conversation = new CVConversation($atts, $content);
         $results = $conversation->getHTML(true);
         $expected = getDataFile('shortcode_rendering.txt');
