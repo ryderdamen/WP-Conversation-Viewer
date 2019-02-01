@@ -311,10 +311,5 @@ The JSON Output of this function is as follows:
 `````
 
 
-
-## Questions?
-If you have any questions or feature requests, please feel free to send me a message.
-
-## TODO (For Ryder)
-* build out timestamp options
-* add in ability to select a default highlighted person
+## Questions & Contributions
+If you have any questions or feature requests, feel free to submit an issue or send me a message. Want to add a new feature? Pull requests welcome!
