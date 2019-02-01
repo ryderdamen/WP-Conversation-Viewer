@@ -3,10 +3,11 @@ services:
    wordpress:
      depends_on:
        - db
-     image: wordpress:latest
+     build: .
      volumes:
        - wordpress_files:/var/www/html
        - ./src/:/var/www/html/wp-content/plugins/ConversationViewer/
+       - ./:/code
      ports:
        - "80:80"
      restart: always

@@ -1,9 +1,9 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-include(realpath(dirname(__FILE__) . '/requirements.php'));
-include(realpath(dirname(__FILE__) . '/helpers.php'));
-include('src/Conversation.php');
+include( __DIR__ . '/requirements.php');
+include( __DIR__ . '/helpers.php' );
+include( __DIR__ . '/../src/Conversation.php' );
 
 
 /**
