@@ -1,2 +1,6 @@
+# Regular Stuff
+**/.DS_Store
 
-.DS_Store
+
+# Repo-Specific Stuff
+/data

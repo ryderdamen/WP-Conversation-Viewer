@@ -28,7 +28,7 @@ class ConversationViewerTest extends TestCase {
             'padding' => '25',
 		);
         $content = "// Me: This is test content";
-        include('Conversation.php');
+        include('src/Conversation.php');
         $conversation = new CVConversation($atts, $content);
         $results = $conversation->getHTML(true);
         $expected = getDataFile('shortcode_rendering.txt');
